@@ -1,0 +1,5 @@
+
+In order to run this project successfully you need to install two Paython packages.
+
+1. Pillow 
+2. <a href="https://django-embed-video.readthedocs.io/en/latest/installation.html"> Embed_video </a> 
