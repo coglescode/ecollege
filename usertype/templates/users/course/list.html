@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %} My courses {% endblock %}
+
+{% block content %}
+  <h1>My courses</h1>
+  <div class="module">
+    <div class="my_courses">
+    {% for course in object_list %}
+      <div class="course-info card rounded shadow-sm">
+        <h3> {{ course.title }} </h3>
+        <p><a href="{% url 'user_course_detail' course.id %}">Access contents</a></p>
+      </div>
+    {% empty %}
+      <p>You are not enroll on any course yet
+        <a href="{% url 'course_list' %}">Browse courses</a> to enroll in a course.
+      </p>
+    {% endfor%}
+    </div>
+    </div>
+{% endblock %} 
+ 

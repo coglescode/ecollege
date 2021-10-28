@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+ 
+{% block title %}
+  {% if subject %}
+    {{ subject.title }} courses
+  {% else %}
+    All courses
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  
+    <h1>
+      {% if subject %} 
+        {{ subject.title }} courses 
+      {% else %}
+        All courses
+      {% endif %}        
+    </h1>
+<div id="wrapper">
+  
+    <!--Side bar of subjects -->
+    <div class="navbar contents d-flex align-items-center justify-content-center ">
+
+      <h4 class="dropdown-toggle p-2"{% if not subject %}class="selected"{% endif %} 
+        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> Subjects </h4>
+
+      <a id="all_link" class="p-4" href="{% url 'course_list' %}">All</a>
+
+      <ul id="modules" class="dropdown-menu " aria-labelledby="dropdownMenuButton1">      
+        {% for s in subjects %}
+          <li {% if subject == s %}class="selected"{% endif %}>
+            <a href="{% url 'course_list_subject' s.slug %}">
+              {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!--Main content where all courses displays-->
+    <div class="module">
+      <div id="courses_card">
+        {% for course in courses %}
+          {% with subject=course.subject %}
+            <div id="course_div" class="card shadow-sm">
+              <h3><a href="{% url 'course_detail' course.slug %}" > {{ course.title }} </a></h3>
+              <p><a href="{% url 'course_list_subject' subject.slug %}"> {{ subject}} </a>
+                {{ course.total_modules }} modules.
+                Instructor: {{ course.owner.get_full_name }}
+              </p>
+            </div>
+          {% endwith %}
+        {% empty %}
+            <p>No courses found yet for this subject. </p>
+            <!-- p><a href="{% url 'course_create' %}" class="button">Create new course</a></p -->
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
