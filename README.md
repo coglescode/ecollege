@@ -24,11 +24,9 @@ In the second last line there is a link there you can open follow to open the we
 
 __Ecollege__ is an e-learning platform where users can be both teachers or students. As a teacher you can manage and publish your own courses, while being an student of somebody else courses. In order to become one of this two rolls you have to register first. If you are on a desktop computer, on top of the index page there is two links `Teacher Register` and `Student Register`, let's register as a teacher first to see its functionality. Click on `Teacher Register` and create your account, at the end of the form there is an input labeled `Group` where you are going to choose `Instructors` in order to create your Insctructor account. Click on `Create my account`.  
 
-You has been redirected to a log-in page, go ahead an log in, you will be redirected to this page:
+You has been redirected to a log-in page, go ahead an log in. Once you have logged in successfully you will be redirected to your profile page where you can create new courses and manage them. Now create a course.
 
 ![create_courses](/readme_assets/create_courses.jpg)
-<!-- img src="./readme_assets/create_courses.jpg" alt="create_courses" width="100%" height="0%" -->
-
 
 
 
