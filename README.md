@@ -27,7 +27,7 @@ __Ecollege__ is an e-learning platform where users can be both teachers or stude
 You has been redirected to a log-in page, go ahead an log in, you will be redirected to this page:
 
 
-<img src="./readme_assets/create_courses.jpg" alt="create_courses" width="100%" height="500" >
+<img src="./readme_assets/create_courses.jpg" alt="create_courses" width="100%" height="auto" >
 
 
 
