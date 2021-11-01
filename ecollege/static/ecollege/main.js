@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-function passed1200(innerWidth){
+function passed1200(){
 
   const subjectSidebar = document.querySelector(".contents");
   const dropdown_btn = document.querySelector("#dropdownMenuButton1"); 
@@ -33,5 +33,7 @@ function passed1200(innerWidth){
   }
   
 }
+
+
 
 

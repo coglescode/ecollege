@@ -1,8 +1,15 @@
 @import url(//fonts.googleapis.com/css?family=Roboto:500,300,400);
 
 
-  /** Breakpoint min-width: 576px as default **/
+  /** Breakpoint min-width: 576px as the first  **/
  
+    nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        transition: top 0.3s;
+    }
+
     .image {
        background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)),
         url( '/static/ecollege/images/clay-banks-nYToduYJH-c-unsplash.jpg' );       
