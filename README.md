@@ -53,7 +53,8 @@ We are going to take a look into the subfolder `ecollege` which is the main app 
 
 # Additional Information #
 ## Inside readme_assets ##
-This folder holds the images used for this readme
+This folder holds the images used for this readme.
+__To access the admin site you need to create a superuser.__
 
 ## Requirements.txt ##
 In the requirements.txt file you will find the two python packages needed to run this project.
@@ -100,7 +101,7 @@ On the next page there is a form that you are going to fill with the information
 
 You will be redirected back to your  `My courses` page where now you can see your first course created, but this course is still empty. Click `Edit modules`, and create at least one module and save it.\
 \
-![edit_modules_form](/readme_assets/edit_modules_form.jpg) 
+![create_courses_form](/readme_assets/create_courses_form.jpg) 
 
 No you will see a `Manage content` link has been added to your course box, click it to finally add some content to module you just created. You will see a page like below.\
 \
