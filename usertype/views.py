@@ -1,6 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, FormView
@@ -8,33 +6,27 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CourseEnrollForm, UserRegisterForm
-from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from ecollege.models import Course
 
-from django.contrib.auth.models import User, Group
+#from django.contrib.auth.models import User, Group
 
 
 # Create your views here.
 
 class StudentRegistrationView(CreateView):
   template_name = 'users/student/registration.html'
-  form_class = UserCreationForm
+  form_class = UserRegisterForm
   success_url = reverse_lazy('user_course_list') 
 
-  def form_valid(self, form):
+  """ def form_valid(self, form):
     result = super().form_valid(form)
     cd = form.cleaned_data
     user = authenticate(username=cd['username'], password=cd['password1'])
     login(self.request, user)
-    return result
-
-
-class UserRegisterView(CreateView):
-  template_name = 'users/teacher/registration.html'
-  form_class = UserRegisterForm
-  success_url = reverse_lazy('user_course_list') 
-
+    return result"""
+  
   def form_valid(self, form):
         user = form.save()
         result = super().form_valid(form)
@@ -43,6 +35,17 @@ class UserRegisterView(CreateView):
         return result
 
 
+class TeacherRegisterView(CreateView):
+  template_name = 'users/teacher/registration.html'
+  form_class = UserRegisterForm
+  success_url = reverse_lazy('manage_course_list') 
+
+  def form_valid(self, form):
+        user = form.save()
+        result = super().form_valid(form)
+        group = form.cleaned_data['group']        
+        group.user_set.add(user)
+        return result
 
 class StudentEnrollCourseView(LoginRequiredMixin, FormView):
   course = None

@@ -23,7 +23,7 @@
     }
 
     .call_action_div{
-        font-size: 3rem;
+        font-size: 3rem; 
         margin: 0 1rem;
     }
 
@@ -33,22 +33,6 @@
         font-size: 1.5rem;
     }
 
-    .footer{
-        background-color: rgb(183, 123, 72);    
-        position: relative;        
-        left: 0;
-        bottom: 0;    
-        width: 100%;
-        height: 5em;
-        text-align: center;  
-        margin-top: 15rem;         
-    }
-    
-    .footer i{
-        color: rgb(255, 255, 255);
-        font-size: 2rem;
-    }
-    
     /*****************************************************************/
 
     body{  
@@ -86,7 +70,6 @@
         margin:0;
     }
 
-    /******************************************************/
     #menuLogin{
         width: 100%;
         height: calc(100% - 5em);
@@ -97,11 +80,9 @@
     #menuRegis form {
         width: 100%;
         height: 100%;
-       /* text-align: center; 
-       padding-left: 3rem;*/
-       display: flex;
-       flex-flow: row wrap;
-       justify-content: center;   
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;   
     }
 
   
@@ -115,16 +96,13 @@
    
     span.helptext {
         color:#ccc;
-        /*padding-top: 300px; */  
         text-align: start; 
         padding: 0.5rem 2rem;
     }
  
     .module {
-        /*float:left;*/
         width:100%; 
-        height: 100% ;
-       /*  height: 100%;*/
+        height: 100vh;
         text-align: center;
         margin: 2rem 0;    
 
@@ -165,9 +143,6 @@
     }
     
     .contents {
-        /* width:20%;
-        padding:10px; 
-        float:left; */
         background:#333;
         color: #fff;
         font-family:'Roboto', sans-serif;            
@@ -228,7 +203,6 @@
     
     ul.content-types li {
         list-style:none;
-       /* float:left;*/
         width: 90%;
         margin: 1rem;
         background:#efefef;
@@ -320,8 +294,7 @@
     
     #module-contents  { 
         padding:10px 0;
-        margin: 10px 0;
-        /*border:1px solid #ccc;*/
+        margin: 10px 0;    
         background:#fff;
     }
 
@@ -365,10 +338,7 @@
     .course-info {
         border:1px solid #ccc;
         width: 80%;
-        margin: 1rem;
-       /*padding:0 0; */      
-       /* overflow:auto;    
-      */   
+        margin: 1rem;     
     }
 
     .module p:last-child{
@@ -459,12 +429,7 @@
         width: 100%;
     }
 
-    /*
-    #enroll-form input{
-        margin-left: 2rem;
-    }
-    */
-
+  
     .module h2#overview{
         margin-top: 4rem;
     }
@@ -492,6 +457,9 @@
         margin-top: 2rem;
     }
 
+    .content-links{
+        margin: 2rem 0;
+    }
 
 
 /*****************  Break Point Tablet **************************************/
@@ -695,11 +663,6 @@
     }
 
     
-
-
-
-
-    
 }
 
 /************************ Breakpoint Large desktop *****************************************/
@@ -711,9 +674,10 @@
         justify-content: flex-end;       
     }
 
+    #delete_course{      
+        padding: 10rem;
+    }
  
-
-
 }
 
 /************************ Breakpoint Extra large desktop *****************************************/
@@ -770,14 +734,7 @@
         margin: 1rem 0;
         text-align: start;
     }
-    /*
-    #id_password2{
-        margin: 0 50rem;
-    }  
-
-    #courses_card{       
-        margin-top: 3rem;     
-    } */
+  
    
     #course_div{   
         width: 35%;
@@ -793,8 +750,6 @@
     }
 
     .course-info{
-     /*  margin: 2rem 20rem; 
-       padding: 1rem; */
        width: 35%;
        margin: 1rem;      
     }
@@ -826,17 +781,6 @@
  
     }
 
-   /* .course_content {
-        padding: 5rem 0 0 0;  
-    }
-
-    .course_item{
-        display: flex;
-        flex-flow: row wrap;
-        align-content: center;
-        margin: 1rem;
-    } */
-
     .courses_made{
         padding-top: 2rem;
     }
@@ -866,7 +810,7 @@
     }
 
     #delete_course{
-       /*flex-flow: column; */
+      
        padding: 10rem;
     }
 
@@ -885,20 +829,6 @@
         float: left;
         width: 70%;
     }
-
-     /*
-     ul.content-types{       
-       margin: auto;
-         width: 80%;   
-         flex-flow: row;
-         padding: 2rem;      
-     }
- 
-     ul.content-types li{       
-         
-         padding: 3rem;      
-     }
-     */
      
     .content_form p input, .content_form p textarea{
         width: 600px;        
@@ -913,10 +843,6 @@
     #courses_card{       
         margin: 3rem auto 0 auto;     
         width: 70%;
-    }
-
-    #wrapper{
-        margin: 0;
     }
 
     #navbar li{
@@ -953,7 +879,7 @@
 
     #regis_form p:last-child input{
         margin: 4rem 28rem;
-          /* overflow: hidden;*/
+      
     }
    
     #course_div{
@@ -965,11 +891,6 @@
     .course-info{
         width: 28%;
     }
-
-   
-   /* .videoWrapper iframe {     
-        height: 70%;       
-    }*/
 
     .course_content{
         padding: 0 auto; 
@@ -985,14 +906,12 @@
     }
 
     .videoWrapper iframe{      
-      /*  width: 70%;   
-        margin: auto 0 0 5rem; */   
+  
         margin-top: 1rem;
     }
 
     #edit_course{    
-       /* margin: 0;
-        width: 90%; */
+      
         justify-content: start;
         margin-left: 15rem;     
     }
@@ -1068,13 +987,7 @@
         width: 17%;
     }
 
-   /* #edit_course{
-        flex-flow: row nowrap;
-        width: 80%;
-        margin-left: 40rem;
-    }
-    */
-
+ 
     #edit_course{    
         /* margin: 0;
          width: 90%; */
@@ -1085,7 +998,7 @@
    
 
     #delete_course{      
-        padding:5rem 50rem;
+        padding:5rem 60rem;
     }
     
     #edit_formset{

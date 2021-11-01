@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ecollege.apps.EcollegeConfig',
-    #'students.apps.StudentsConfig',
     'usertype.apps.UsertypeConfig',
     'embed_video'
 ]

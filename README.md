@@ -89,7 +89,7 @@ __Ecollege__ is an e-learning platform where users can be both teachers or stude
 
 
 # Be an Instructor #
-You has been redirected to a log-in page, go ahead an log in. Once you have logged in successfully you will be redirected to your profile page where you can create new courses and manage them. Now create a course.\
+You has been redirected to a log-in page, make sure to choose __Instructors__, go ahead an log in. Once you have logged in successfully you will be redirected to your profile page where you can create new courses and manage them. Now create a course.\
 \
 ![create_courses](/readme_assets/create_courses.jpg)   
 
@@ -114,8 +114,7 @@ Now your are able to edit or delete each content of the module.
 On the left side of the page there is a sidebar there you can navigate between modules, right now we just created one module, go ahead and click on `Edit modules` and create as many modules you like to see the sidebar functionality.
 
 \
-You can see the course content as teacher but we are not going to do that. On the top navbar log out and click on `Register`, this will take you to a form to register as an student.
-
+You can see the course content as teacher but we are not going to do that. On the top navbar log out and click on `Register`, this will take you to a form to register as an student, make sure you choose __Student__ from the dropdown input.
 
 # Be an student #
 Once logged in you will be redirect to your personal page `My courses` where all courses you are enrolled to

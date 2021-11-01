@@ -14,6 +14,6 @@ ModuleFormSet = inlineformset_factory(Course,
 class UserRegisterForm(UserCreationForm):
     group = forms.ModelChoiceField(queryset=Group.objects.all(), required=True)
     
-    class Meta:
+    class Meta: 
       model = User
       fields = ['username', 'password1', 'password2', 'group']

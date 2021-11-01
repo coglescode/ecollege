@@ -1,10 +1,10 @@
-from django.core.exceptions import TooManyFieldsSent
+#from django.core.exceptions import TooManyFieldsSent
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
-from django.db.models.base import Model
-from django.db.models.fields.related import ForeignKey
+#from django.db.models.base import Model
+#from django.db.models.fields.related import ForeignKey
 from .fields import OrderField
 from django.template.loader import render_to_string
 

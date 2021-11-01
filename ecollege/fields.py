@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import fields, query
+#from django.db.models import fields, query
 from django.db.models.query_utils import Q
 
 

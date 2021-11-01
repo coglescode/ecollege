@@ -45,7 +45,7 @@
                                 </li>
                                   
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'teacher_registration'  %}">Teacher Registration</a>
+                                    <a class="nav-link" href="{% url 'teacher_registration'  %}">Teacher Register</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'login' %}">Log In</a>
@@ -63,13 +63,11 @@
 
             {% block content %}                      
             {% endblock %}
-
-
         
-        <footer class="col-12 footer d-flex align-items-center justify-content-center"> 
+        <!-- footer class="col-12 footer d-flex align-items-center justify-content-center"> 
             <h5 class="pr-2">cogles.code</h5>
             <a href="https://github.com/coglescode"><i class="bi bi-github"></i></a>            
-        </footer>
+        </footer -->
        
         {% block script %}      
             <script src="{% static 'ecollege/main.js' %}"></script>
