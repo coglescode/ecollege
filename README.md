@@ -53,7 +53,8 @@ We are going to take a look into the subfolder `ecollege` which is the main app 
 
 # Additional Information #
 ## Inside readme_assets ##
-This folder holds the images used for this readme
+This folder holds the images used for this readme.
+__To access the admin site you need to create a superuser.__
 
 ## Requirements.txt ##
 In the requirements.txt file you will find the two python packages needed to run this project.
