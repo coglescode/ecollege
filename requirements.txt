@@ -1,10 +1,2 @@
-
-In order to run this project successfully you need to install two Python packages into your
-virtual enviroment.
-
-1. Pillow https://pillow.readthedocs.io/en/stable/
-2. Django_embed_video https://django-embed-video.readthedocs.io/en/latest/
-
-Once you have installed both packages go ahead and keep reading the README.md from step 2.
-
-Happy reading!!
+pillow
+django_embed_video
