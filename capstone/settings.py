@@ -30,8 +30,8 @@ SECRET_KEY = 'django-insecure-(e4$bf_d0g(awgsqcp^1mxhheq5mx06_!c*hqo$3u(bjh^ng*s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['coglescode-testenv.herokuapp.com', '127.0.0.1']
-
+ALLOWED_HOSTS = ['coglescode-testenv.herokuapp.com']
+#https://coglescode-testenv.herokuapp.com/
 
 # Application definition
 
