@@ -5,7 +5,7 @@
 This  project is based on existing e-learning platforms on the internet with the distinctiveness of __is free of charge for all users__ that seek free education no matter social status or economic situation. Instead of having a price range, limited discounts an so on. I decided to make it free for all students and you won't find a payment system, cart or promotions of any kind. 
 
 From an Instructor perpective this can be controversial due to give free knowledge to people with the only reward of an happy student that later spread same knowledge to others in classrooms or work places.
-Thas why we only accept Instructors that are passionated to give knowledge.
+That is why we only accept Instructors that are passionated to give knowledge.
 This project is built for you to teach or learn, that's why there is not any kind of social system, we want you to fully commit to the given rolls to be in this platform.
 
 # Complexity #
