@@ -35,7 +35,7 @@ SECRET_KEY = 'django-insecure-(e4$bf_d0g(awgsqcp^1mxhheq5mx06_!c*hqo$3u(bjh^ng*s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [cs50-capstone.up.railway.app]
+ALLOWED_HOSTS = [capstone.up.railway.app]
 
 
 # Application definition
