@@ -1,3 +1,2 @@
-
 web: gunicorn capstone.wsgi
 
