@@ -6,5 +6,4 @@ ecollege/__init__.py
 ecollege/migrations
 templatestags/__pycache/**
 templatestags/__init__.py
-media/
 manage.py
