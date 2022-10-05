@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+    <div class=" image">      
+      <div class="hero-text">
+        <p>We have all the courses you want.</p>
+      </div>    
+    </div>
+
+    <div class="d-flex align-items-center justify-content-around py-5">    
+      <!-- div class="surprised-pic">
+        <img src="{% static 'ecollege/images/thomas-park-KYEeuGUkZ54-unsplash.jpg' %}"  
+          class="img-thumbnail"  alt="People studying in the New York Public Library">
+      </div -->
+      <div class="call_action_div py-xl-5 text-center">
+        <p class="py-lg-4">All our programs are free.</p>
+        <div id="call_action_btn" class="text-light py-5">
+          <a class="rounded-pill p-4 p-lg-5" href="{% url 'course_list' %}">Browse courses</a>
+        </div>
+      </div>
+    </div>
+      
+    <div class="text-center">
+      <h1 class="display-4">Subjects</h1>    
+      <div id="subject_card" class=" d-flex flex-wrap  justify-content-md-center my-5 px-5">
+        {% for s in subjects %}    
+          <div id="subject_link" class="col-sm col-lg-3 col-xl-2 col-xxl-auto card text-center m-2 m-md-4 h-md-75  align-items-center justify-content-center p-5 fs-1 shadow-sm" >       
+            <a  href="{% url 'course_list_subject' s.slug %}">
+              {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
+            </a>     
+          </div>      
+        {% endfor %}
+      </div>
+    </div>
+
+    
+
+{% endblock %}
