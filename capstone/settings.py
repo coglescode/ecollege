@@ -12,12 +12,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
-import whitenoise.middleware
+#import whitenoise.middleware
 from django.urls import reverse_lazy
 
 import os
-import django_heroku
-import dj_database_url
+#import django_heroku
+#import dj_database_url
 import decouple
 
 
@@ -35,7 +35,7 @@ SECRET_KEY = 'django-insecure-(e4$bf_d0g(awgsqcp^1mxhheq5mx06_!c*hqo$3u(bjh^ng*s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['coglescode.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -60,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'capstone.urls'
@@ -136,7 +136,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'),)
 
 # Default primary key field type
@@ -151,5 +151,5 @@ LOGIN_REDIRECT_URL = reverse_lazy('user_course_list')
 LOGOUT_REDIRECT_URL = reverse_lazy('index')
 
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 
