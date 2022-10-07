@@ -1,4 +1,4 @@
-
+settings.ini
 .idea
 .vscode
 ecollege/__pycache/**
@@ -6,4 +6,3 @@ ecollege/__init__.py
 ecollege/migrations
 templatestags/__pycache/**
 templatestags/__init__.py
-manage.py

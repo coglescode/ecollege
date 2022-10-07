@@ -18,7 +18,7 @@ from django.urls import reverse_lazy
 import os
 #import django_heroku
 #import dj_database_url
-import decouple
+from decouple import config 
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(e4$bf_d0g(awgsqcp^1mxhheq5mx06_!c*hqo$3u(bjh^ng*s'
+SECRET_KEY = config('DEBUG', default=True, cast=bool)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
