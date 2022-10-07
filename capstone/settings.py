@@ -95,6 +95,7 @@ DATABASES = {
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
     """
+    
     'default': {
         'DATABASE_URL': config('DATABASE_URL'), 
         'PGDATABASE': config('PGDATABASE'),
