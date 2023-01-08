@@ -1,9 +1,10 @@
-settings.ini
+# settings.ini
 .idea
 .vscode
-ecollege/__pycache/**
+ecollege/__pycache__/**
 ecollege/__init__.py
 ecollege/migrations
 templatestags/__pycache/**
 templatestags/__init__.py
 db.sqlite3
+venv/
