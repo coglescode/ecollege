@@ -40,16 +40,11 @@
                                     <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                                 </li>
                             {% else %}
-                                                                  
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'teacher_registration'  %}">Teacher Register</a>
-                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'login' %}">Log In</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'student_registration' %}">Register</a>
-                                    
+                                    <a class="nav-link" href="{% url 'student_registration' %}">Register</a>                                    
                                 </li>
                             {% endif %}
                         </ul>
