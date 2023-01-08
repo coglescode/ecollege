@@ -11,10 +11,9 @@ class CourseEnrollForm(forms.Form):
 
 
 class UserRegisterForm(UserCreationForm):
-    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=True)
+    # group = forms.ModelChoiceField(queryset=Group.objects.all(), required=True)
     
     class Meta:
-      model = User
-      fields = ['username', 'password1', 'password2', 'group']
-
-
+      model = User 
+      fields = ['username', 'password1', 'password2']
+      

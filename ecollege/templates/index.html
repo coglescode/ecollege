@@ -9,10 +9,6 @@
     </div>
 
     <div class="d-flex align-items-center justify-content-around py-5">    
-      <!-- div class="surprised-pic">
-        <img src="{% static 'ecollege/images/thomas-park-KYEeuGUkZ54-unsplash.jpg' %}"  
-          class="img-thumbnail"  alt="People studying in the New York Public Library">
-      </div -->
       <div class="call_action_div py-xl-5 text-center">
         <p class="py-lg-4">All our programs are free.</p>
         <div id="call_action_btn" class="text-light py-5">
@@ -23,9 +19,9 @@
       
     <div class="text-center">
       <h1 class="display-4">Subjects</h1>    
-      <div id="subject_card" class=" d-flex flex-wrap  justify-content-md-center my-5 px-5">
+      <div id="subject_card" class="border-0   d-flex flex-wrap  justify-content-center my-5 ">
         {% for s in subjects %}    
-          <div id="subject_link" class="col-sm col-lg-3 col-xl-2 col-xxl-auto card text-center m-2 m-md-4 h-md-75  align-items-center justify-content-center p-5 fs-1 shadow-sm" >       
+          <div id="subject_link" class="col-10 col-sm-4 col-md-5 col-lg-3 col-xl-1 card text-center m-2 m-sm-4 m-xl-5 h-md-75 d-flex flex-wrap align-items-center justify-content-center p-4 p-sm-3 p-xl-5 fs-3 shadow-sm" >       
             <a  href="{% url 'course_list_subject' s.slug %}">
               {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
             </a>     
@@ -34,6 +30,15 @@
       </div>
     </div>
 
+    <div class=" container-fluid d-flex flex-wrap bg-success justify-content-xl-center align-items-md-center py-5">    
+        <figure class=" col-md-6 col-xl-4">
+          <img class="img-fluid rounded shadow-sm" src="/static/ecollege/images/pexels-christina-morillo-1181398.jpg" alt="">
+        </figure>
+        <div id="call_action_btn" class="col-md-6 col-xl-4 d-flex flex-wrap justify-content-center align-content-md-center p-4 ">
+          <p class="text-white fs-2 text-center fw-normal text-wrap lh-base">Are you passionate to teach others?</p>
+          <a class=" rounded-pill mt-4  m-md-0 m-lg-4 p-4 px-xl-5 " href="{% url 'teacher_registration' %}"> Teach now!</a>
+        </div>
+    </div>
     
 
 {% endblock %}

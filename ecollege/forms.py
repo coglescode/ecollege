@@ -10,10 +10,10 @@ from django.contrib.auth.models import User, Group
 ModuleFormSet = inlineformset_factory(Course, 
  Module, fields=['title', 'description'], extra=2, can_delete=True)
 
-
+"""
 class UserRegisterForm(UserCreationForm):
-    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=True)
-    
+  
     class Meta: 
       model = User
-      fields = ['username', 'password1', 'password2', 'group']
+      fields = ['username', 'password1', 'password2']
+"""

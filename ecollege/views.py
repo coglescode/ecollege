@@ -194,16 +194,3 @@ class IndexView(CourseListView):
     return self.render_to_response({'subjects':subjects, 'subject':subject, 'courses': courses})
 
  
-
-"""class TeacherRegisterView(CreateView):
-  template_name = 'teacher/registration.html'
-  form_class = UserRegisterForm
-  success_url = reverse_lazy('manage_course_list') 
-
-  def form_valid(self, form):
-        user = form.save()
-        result = super().form_valid(form)
-        group = form.cleaned_data['group']        
-        group.user_set.add(user)
-        return result
-"""
