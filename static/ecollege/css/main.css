@@ -55,15 +55,6 @@
     
     a {
         color:#4bb336;
-        text-decoration:none;
-  
-    }
-    
-    ul {
-        float:left;    
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
         font-family:'Roboto', sans-serif;
         font-weight:300;
         text-align: center;
@@ -73,8 +64,7 @@
         background:#efefef;
         width:100%;
         overflow:auto;
-        
-        text-align: center;
+        padding: 1rem;        
     }
 
     #menuLogin{
@@ -181,10 +171,6 @@
     
     .contents ul li:hover {
         background:#3f3f3f;
-    }
-    
-    .contents ul span {
-        text-transform:uppercase;
         color:#bbb;
         font-size:14px;
     }
@@ -262,7 +248,7 @@
         text-transform:uppercase;
         border:none;
         padding:10px 20px;
-        margin:20px 0;
+        margin: 20px 0;
     }
     
     a.secondary-button {
