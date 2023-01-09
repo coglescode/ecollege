@@ -33,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', default=False, cast=bool)
+DEBUG = os.getenv('DEBUG')
         
 ALLOWED_HOSTS = ['*']
 
@@ -88,18 +88,18 @@ WSGI_APPLICATION = 'capstone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+#DATABASE_URL = os.getenv('DATABASE_URL')
    
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800) 
-    #'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': BASE_DIR / 'db.sqlite3',
-    #    'USER': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #    'PASSWORD': config('PASS'),
-    #    'HOST': config('HOST'),
-    #    'PORT': config('PORT')
-    #} 
+   
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'XzvlRcV7hHudgR0Iicx6',
+        'HOST': 'containers-us-west-85.railway.app',
+        'PORT': 5574,
+    } 
 }
 
 
@@ -141,8 +141,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
