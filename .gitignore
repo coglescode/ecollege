@@ -1,5 +1,4 @@
 settings.ini
-.idea
 .vscode/
 ecollege/__pycache__/**
 capstone/__pycache__/
@@ -9,3 +8,4 @@ templatestags/__pycache/**
 templatestags/__init__.py
 db.sqlite3
 venv/
+.env
