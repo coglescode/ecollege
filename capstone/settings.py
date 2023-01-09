@@ -35,9 +35,9 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
         
-ALLOWED_HOSTS = ['https://ecollege.up.railway.app/']
+ALLOWED_HOSTS = ['ecollege.up.railway.app', 'www.ecollege.up.railway.app']
 
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['ecollege.up.railway.app/admin/login/?next=/admin']
 
 # Application definition
 
