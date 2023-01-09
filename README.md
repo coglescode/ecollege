@@ -21,7 +21,7 @@ Inside the project folder `capstone` there are a few files and folder that compo
 We are going to take a look into the subfolder `ecollege` which is the main app of this project.
 
 ## Inside ecollege folder ##
-`static` folder holds the `*.css` and `*.js` files necesary to style the project.
+`static` folder holds the `*.css` and `*.js` files necesary to style the project. 
 
 `templates` folder holds subfolder with `*.html` files that compose the body for the courses content of the project.
 
