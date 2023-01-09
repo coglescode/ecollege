@@ -1,6 +1,6 @@
 settings.ini
 .idea
-.vscode
+.vscode/
 ecollege/__pycache__/**
 ecollege/__init__.py
 ecollege/migrations
