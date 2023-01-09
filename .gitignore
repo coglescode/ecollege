@@ -2,6 +2,7 @@ settings.ini
 .idea
 .vscode/
 ecollege/__pycache__/**
+capstone/__pycache__/**
 ecollege/__init__.py
 ecollege/migrations
 templatestags/__pycache/**
