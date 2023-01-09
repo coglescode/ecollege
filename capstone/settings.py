@@ -37,7 +37,7 @@ DEBUG = os.getenv('DEBUG')
         
 ALLOWED_HOSTS = ['ecollege.up.railway.app', 'www.ecollege.up.railway.app']
 
-CSRF_TRUSTED_ORIGINS = ['ecollege.up.railway.app/admin/login/?next=/admin']
+CSRF_TRUSTED_ORIGINS = ['https://ecollege.up.railway.app/admin/login/?next=/admin']
 
 # Application definition
 
