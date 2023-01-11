@@ -5,13 +5,13 @@
 {% block content %}
 
 
-  <h1>Sign up </h1>
-  <div id="menuRegis" class="text-center py-5">
-    <p>Enter your details to create an account: </p>
-    <form id="regis_form" class="container-xl" method="post">
+  <h1 class="text-center">Sign up </h1>
+  <div id="menuRegis" class="container p-md-5 ">
+    <p class="text-center">Enter your details to create an account: </p>
+    <form id="regis_form" class="form-control  border-0 d-flex flex-wrap justify-items-center " method="post">
       {{ form }}
       {% csrf_token %}
-      <p><input type="submit" value="Create my account"></p>
+      <input type="submit" class="form-control" value="Create my account">
     </form>
   </div>
 
