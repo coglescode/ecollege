@@ -2,9 +2,11 @@
 from django.urls import path
 from . import views
 
-#from ecollege.views import CourseListView
 from django.contrib.auth import views as auth_views
 
+#from .views import LoginView
+
+#app_name = "ecollege"
 
 urlpatterns = [
   #path('', views.index, name="index"),
@@ -20,8 +22,6 @@ urlpatterns = [
   path('module/<int:module_id>/', views.ModuleContentListView.as_view(), name='module_content_list'),
   path('subject/<slug:subject>/', views.CourseListView.as_view(), name='course_list_subject'),
   path('<slug:slug>/', views.CourseDetailView.as_view(), name='course_detail'), 
-  
-
 
 
 ]

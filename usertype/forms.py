@@ -1,6 +1,5 @@
 from django import forms
 from ecollege.models import Course
-
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
 
@@ -22,4 +21,4 @@ class UserRegisterForm(UserCreationForm):
             
             for field_name, field in self.fields.items():
                   field.widget.attrs['class'] = 'form-control form-control-md shadow-sm '
-                  #self.fields['username'].widget.attrs.update({'class': 'my-2'})
+                  

@@ -16,16 +16,19 @@
         </div>
       </div>
     </div>
-      
+    
+    <!-- Section of Subjects list-->
     <div class="text-center">
-      <h1 class="display-4">Subjects</h1>    
+      <h1 class="display-4">Subjects</h1> 
       <div id="subject_card" class="border-0   d-flex flex-wrap  justify-content-center my-5 ">
         {% for s in subjects %}    
           <div id="subject_link" class="col-8 col-sm-4 col-md-4 col-lg-3 col-xl-2 card text-center m-2 m-sm-4 m-xl-5 p-4 p-sm-3 p-md-4 p-lg-5 h-md-75 d-flex flex-row  justify-content-center  fs-3 shadow-sm" >       
             <a  href="{% url 'course_list_subject' s.slug %}">
               {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
             </a>     
-          </div>      
+          </div>
+        {% empty %}       
+          <h2> We are working to add courses right now. Be patient!</h2>
         {% endfor %}
       </div>
     </div>

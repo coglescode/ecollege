@@ -7,7 +7,7 @@ from django.forms.models import modelform_factory
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
-from django.views.generic.edit import UpdateView, CreateView, DeleteView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView, FormView
 from django.views.generic.detail import DetailView
 from usertype.forms import CourseEnrollForm, UserRegisterForm
 from .models import Course, Module, Content, Subject
@@ -21,6 +21,7 @@ from django.apps import apps
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http.response import HttpResponseBase
 
+from capstone.settings import LOGIN_REDIRECT_URL
 
 
 
@@ -192,5 +193,3 @@ class IndexView(CourseListView):
       subject = get_object_or_404(Subject, slug=subject)
       courses = courses.filter(subject=subject)
     return self.render_to_response({'subjects':subjects, 'subject':subject, 'courses': courses})
-
- 

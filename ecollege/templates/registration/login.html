@@ -4,26 +4,23 @@
 {% block title %}Log-in{% endblock %}
 
 {% block content %}
-  <h1>Log-in</h1>
+  <h1 class="text-center">Log-in</h1>
 
-    <div id="menuLogin" class="d-flex flex-column align-items-center justify-content-start col-12 ">
+    <div class="container-fluid d-flex flex-wrap  text-center justify-content-center">
    
         {% if form.errors %}
-          <p>Your username and password didn't match. Please try again.</p>
+          <p class="col-10 py-3">Your username and password didn't match. Please try again.</p>
         {% else %}
-          <p>Please, use the following form to log-in:</p>
+          <p class=" col-10 py-3">Please, use the following form to log-in:</p>
         {% endif %}
         
-        <form id="login_form" action="{% url 'login' %}" method="post">
+        <form id="login_form" class="col-5 col-lg-4 col-xl-3 " action="{% url 'login' %}" method="post">
           {{ form.as_p }}
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ next }}" />
-          <p><input type="submit" value="Log-in"></p>
+          <input class="form-control" type="submit" value="Log-in">
         </form>
-
     </div>
 
 
-  
-  </div>
 {% endblock %}

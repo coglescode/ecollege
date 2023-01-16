@@ -1,10 +1,13 @@
 settings.ini
 .vscode/
-ecollege/__pycache__/**
+ecollege/__pycache__/
+ecollege/templatestags/__pycache__/
 capstone/__pycache__/
+usertype/__pycache__/
+usertype/migrations/__pycache__/
 ecollege/__init__.py
-ecollege/migrations
-templatestags/__pycache/**
+ecollege/migrations/
+templatestags/__pycache__/
 templatestags/__init__.py
 db.sqlite3
 venv/
