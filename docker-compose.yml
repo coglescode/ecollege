@@ -1,0 +1,28 @@
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+  db:
+    image: postgres:14.5
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+    command: ["sh ./wait-for-it.sh", "db:5432", "--",
+            "python", "/capstone/manage.py", "runserver",
+            "0.0.0.0:8000"]
+    restart: always
+    volumes:
+      - .:/capstone
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=capstone.settings.prod
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

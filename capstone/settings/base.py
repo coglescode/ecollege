@@ -21,7 +21,7 @@ from decouple import config
 from dotenv import  load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -32,13 +32,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 #SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
-        
-ALLOWED_HOSTS = ['ecollege.up.railway.app', 'www.ecollege.up.railway.app']
+
+
+
+ALLOWED_HOSTS = ['*']
 
 # Here goes your base domain
-CSRF_TRUSTED_ORIGINS = ['https://ecollege.up.railway.app']
+#CSRF_TRUSTED_ORIGINS = ['https://ecollege.up.railway.app']
 
 # Application definition
 
@@ -90,19 +90,8 @@ WSGI_APPLICATION = 'capstone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#DATABASE_URL = os.getenv('DATABASE_URL')
-   
-DATABASES = {
-   
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'XzvlRcV7hHudgR0Iicx6',
-        'HOST': 'containers-us-west-85.railway.app',
-        'PORT': 5574,
-    } 
-}
+
+
 
 
 
