@@ -29,11 +29,10 @@ from ecollege.forms import LoginForm
 
 
 urlpatterns = [        
-    #path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
-
-    path('login/', views.LoginView.as_view(template_name="registration/login.html", authentication_form=LoginForm), name='login'),
-
-    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),   
+    path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html", authentication_form=LoginForm), name='login'),
+    path('accounts/logout/', auth_views.LogoutView.as_view(template_name="registration/logged_out.html"), name='logout'),   
+    
+    #path('logout/', views.LogoutView.as_view(template_name="registration/logged_out.html"), name='logout'),   
     path('admin/', admin.site.urls),
     path('course_list', CourseListView.as_view(), name='course_list'),    
     #path('students/', include('students.urls')),

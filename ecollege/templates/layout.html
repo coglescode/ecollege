@@ -28,6 +28,7 @@
                                 <a class="nav-link" href="{% url 'course_list'  %}">All courses</a>
                             </li>
                             {% if user.is_authenticated %}
+                              
                                 <li class="nav-item">
                                     <a class="nav-link user" id="{{ user.username }}" href="{% url 'user_course_list' %}"><strong>{{ user.username }}</strong></a>
                                 </li>   
@@ -36,7 +37,10 @@
                                 </li>
                                                     
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                                    <form id="logout-form" method="post" action="{% url 'logout' %}">
+                                        {% csrf_token %}
+                                        <button type="submit">Log out</button>
+                                      </form>
                                 </li>
                             {% else %}
                                 <li class="nav-item">
