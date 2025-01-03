@@ -1,11 +1,25 @@
-FROM python:3.10.6
+# Pull official base Python Docker image
+FROM python:3.12
+
+# Set enviroment variable
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-WORKDIR /capstone
-COPY requirements.txt /capstone/
+
+# Set working directory
+WORKDIR /src
+
+# Install dependencies
+COPY requirements.txt /src/
+#COPY manage.py /src/
+#RUN pip install --upgrade pip
+
 RUN pip install -r requirements.txt
-COPY . /capstone/
-#EXPOSE 8000
-#CMD [ "python3", " manage.py", " runserver", "0.0.0.0:8000" ]
+
+COPY . /src/
+
+ENV DJANGO_SETTINGS_MODULE=capstone.settings
+
+EXPOSE 8000
+CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
 
  
