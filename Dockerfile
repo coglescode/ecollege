@@ -1,11 +1,17 @@
-FROM python:3.10.6
+# Dockerfile for ecollege
+FROM python:3.13
+
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-WORKDIR /capstone
-COPY requirements.txt /capstone/
+
+WORKDIR /src
+
+COPY requirements.txt /src//
 RUN pip install -r requirements.txt
-COPY . /capstone/
-#EXPOSE 8000
-#CMD [ "python3", " manage.py", " runserver", "0.0.0.0:8000" ]
+
+COPY . /src/
+
+EXPOSE 8001
+CMD [ "python3", " manage.py", " runserver", "0.0.0.0:8001" ]
 
  

@@ -32,12 +32,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "bl(!)7up@hr+p3#ubln(+(%g86z3w@47&778doyqrg^5$e&ou7"
+#SECRET_KEY = "bl(!)7up@hr+p3#ubln(+(%g86z3w@47&778doyqrg^5$e&ou7"
 #SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 
-ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['*']
 
 # Here goes your base domain
 #CSRF_TRUSTED_ORIGINS = ['https://ecollege.up.railway.app']
@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'capstone.wsgi.application'
 DATABASES = {   
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'db.sqlite3',
     } 
 }
 
