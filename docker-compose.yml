@@ -1,28 +1,30 @@
 services:
-  web:
-    build: .
-    depends_on:
-      - db
   db:
-    image: postgres:14.5
+    image: postgres
     restart: always
+    #user: 
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-
-    command: ["sh ./wait-for-it.sh", "db:5432", "--",
-            "python", "/capstone/manage.py", "runserver",
-            "0.0.0.0:8000"]
+  web:
+    #build: .
+    command: ["./wait-for-it.sh", "db:5432", "--",
+            "python", "manage.py", "runserver",
+            "0.0.0.0:8001"]
+    container_name: ecollege
+    image: coglescode/ecollege:latest
     restart: always
     volumes:
-      - .:/capstone
+      - .:/src
     ports:
-      - "8000:8000"
+      - "8001:8001"
     environment:
-      - DJANGO_SETTINGS_MODULE=capstone.settings.prod
-      - POSTGRES_DB=postgres
+      - DJANGO_SETTINGS_MODULE=capstone.settings
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+    
