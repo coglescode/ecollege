@@ -10,7 +10,7 @@ SECRET_KEY='4-8p+vt=sr2$gc8gy9ylkp37x9t5k8=e&r^w_l+8qd@p6ib_t+'
 #    ('Antonio M', 'email@mydomain.com'),
 #]
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',

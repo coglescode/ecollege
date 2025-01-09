@@ -22,7 +22,7 @@ services:
     ports:
       - "8001:8001"
     environment:
-      - DJANGO_SETTINGS_MODULE=capstone.settings
+      - DJANGO_SETTINGS_MODULE=capstone.settings.local
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     depends_on:
