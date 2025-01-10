@@ -1,5 +1,5 @@
 # Final Project Capstone # 
-
+Live demo. https://ecollege.coglescode.com
 
 # Distinctiveness #
 This  project is based on existing e-learning platforms on the internet with the distinctiveness of __is free of charge for all users__ that seek free education no matter social status or economic situation. Instead of having a price range, limited discounts an so on. I decided to make it free for all students and you won't find a payment system, cart or promotions of any kind. 
