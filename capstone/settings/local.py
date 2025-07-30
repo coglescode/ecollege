@@ -13,6 +13,6 @@ SECRET_KEY='4-8p+vt=sr2$gc8gy9ylkp37x9t5k8=e&r^w_l+8qd@p6ib_t+'
 DATABASES = {   
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'local.db.sqlite3',
     } 
-}
+} 

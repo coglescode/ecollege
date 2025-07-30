@@ -2,7 +2,6 @@ services:
   db:
     image: postgres
     restart: always
-    #user: 
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
@@ -11,21 +10,24 @@ services:
       - POSTGRES_PASSWORD=postgres
   web:
     #build: .
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8001"]
-    # command: ["./wait-for-it.sh", "db:5432", "--",
-    #         "python", "manage.py", "runserver",
-    #         "0.0.0.0:8001"]
+    entrypoint: ./entrypoint.sh
     container_name: ecollege
-    image: coglescode/ecollege:latest
+    # image: coglescode/ecollege:latest
+    image: ecollege:dev
     restart: always
     volumes:
       - .:/src
     ports:
       - "8001:8001"
     environment:
-      - DJANGO_SETTINGS_MODULE=capstone.settings.production
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+       DJANGO_SETTINGS_MODULE: capstone.settings.local
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: postgres
+       DJANGO_SUPERUSER_USERNAME: ${USER}
+       DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL}
+       DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD}
+
+    
     depends_on:
       - db
     
