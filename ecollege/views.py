@@ -21,7 +21,7 @@ from django.apps import apps
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http.response import HttpResponseBase
 
-from capstone.settings import LOGIN_REDIRECT_URL
+from capstone.settings.base import LOGIN_REDIRECT_URL
 
 
 
