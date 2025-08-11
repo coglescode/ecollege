@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
- 
+
 import whitenoise.middleware
 from django.urls import reverse_lazy
 
@@ -21,8 +21,8 @@ from decouple import config
 from dotenv import  load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -32,12 +32,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = "bl(!)7up@hr+p3#ubln(+(%g86z3w@47&778doyqrg^5$e&ou7"
+SECRET_KEY = "bl(!)7up@hr+p3#ubln(+(%g86z3w@47&778doyqrg^5$e&ou7"
 #SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 
-#ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 
 # Here goes your base domain
 #CSRF_TRUSTED_ORIGINS = ['https://ecollege.up.railway.app']
@@ -87,6 +87,29 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'capstone.wsgi.application'
+
+
+# Database
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+DATABASES = {   
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+    } 
+}
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': os.getenv('POSTGRES_DB'),
+#        'USER': os.getenv('POSTGRES_USER'),
+#        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+#        'HOST': 'db',
+#        'PORT': 5432,
+#    }
+#}
+
+
 
 
 # Password validation
