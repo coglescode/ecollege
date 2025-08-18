@@ -1,19 +1,55 @@
 # Dockerfile for ecollege
-FROM python:3
+FROM python:3.13.3-slim-bookworm AS build
 
+# Environment variables to optimize Python performance
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /src
+# Create the app directory
+RUN mkdir /app
 
-COPY requirements.txt /src/
-RUN pip install --no-cache-dir -r requirements.txt
+# Set working directory
+WORKDIR /app
 
-COPY . /src/
+# Install dependencies
+RUN apt-get update && apt-get install -y gcc 
+
+COPY requirements.txt .
+
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+
+# Stage 2: Production stage
+FROM python:3.13.3-slim-bookworm
+
+RUN useradd -m -r appuser && \
+    mkdir -p /app && \
+    chown appuser:appuser /app
+
+COPY --from=build /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
+COPY --from=build /usr/local/bin /usr/local/bin
+
+# Set working directory
+WORKDIR /app
+
+# Copy the application code
+COPY  --chown=appuser:appuser . .
+
+# Environment variables to optimize Python performance
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Switch to non-root user
+USER appuser
+
+# Expose the application port
+EXPOSE 8001
+
+# Make the entrypoint script executable
+RUN chmod +x /app/entrypoint.prod.sh
 
 ENV DJANGO_SETTINGS_MODULE=capstone.settings.production
 
-EXPOSE 8001
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8001" ]
-
- 
+# Set the entrypoint script
+ENTRYPOINT ["/app/entrypoint.prod.sh"]
