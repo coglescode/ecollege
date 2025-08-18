@@ -16,6 +16,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
 
+DATABASE_SCHEMAS = ['test', 'public']
 
 DATABASES = {
    'default': {
@@ -24,6 +25,9 @@ DATABASES = {
        'USER': os.getenv('POSTGRES_USER'),
        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
        'HOST': os.getenv('POSTGRES_HOST'),
-       'PORT': os.getenv('POSTGRES_PORT')
+       'PORT': os.getenv('POSTGRES_PORT'),
+       'OPTIONS': {
+           'options': f"-c search_path={','.join(DATABASE_SCHEMAS)}"
+       }
    }
 }
