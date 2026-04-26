@@ -6,13 +6,13 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Create the app directory
-RUN mkdir /app
-
-# Set working directory
-WORKDIR /app
+#RUN mkdir /app
 
 # Install dependencies
 RUN apt-get update && apt-get install -y gcc 
+
+# Set working directory
+WORKDIR /app
 
 COPY requirements.txt .
 
@@ -44,12 +44,12 @@ ENV PYTHONDONTWRITEBYTECODE=1
 USER appuser
 
 # Expose the application port
-EXPOSE 8001
+EXPOSE 8000
 
 # Make the entrypoint script executable
 RUN chmod +x /app/entrypoint.prod.sh
 
-ENV DJANGO_SETTINGS_MODULE=capstone.settings.production
+ENV DJANGO_SETTINGS_MODULE=capstone.settings.local
 
 # Set the entrypoint script
 ENTRYPOINT ["/app/entrypoint.prod.sh"]
