@@ -1,0 +1,52 @@
+services:
+  # db:
+  #   image: postgres:17.6
+  #   user:  ${USEROS}:${USEROS}
+  #   container_name: postgres-db
+  #   restart: always
+  #   # networks:
+  #   #   - postgres_default
+  #   # set shared memory limit when using docker-compose
+  #   shm_size: 128mb
+  #   # or set shared memory limit when deploy via swarm stack
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - /mnt/postgres:/var/lib/postgresql/data
+  #   #  - postgres:/var/lib/postgresql/data
+  #   #  - type: tmpfs
+  #   #    target: /dev/shm
+  #   #    tmpfs:
+  #   #      size: 134217728 # 128*2^20 bytes = 128Mb
+  #   environment:
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #     PGDATA: ${PGDATA}
+  web:
+    build: .
+    container_name: ecollege_app
+    image: coglescode/ecollege:dev
+    restart: always
+    networks:
+       - django_network
+    # volumes:
+    #   - .:/src
+    ports:
+      - "8000:8000"
+      #- "80:80"
+    env_file:
+      - .env
+    # depends_on:
+    #   db:
+    #     condition: service_healthy
+    #     restart: true
+    #command: ["./entrypoint.prod.sh"]
+    # command: ["./wait-for-it.sh", "db:5432", "--",
+    #         "python", "manage.py", "runserver",
+    #         "0.0.0.0:8001"]
+
+
+networks:
+  django_network:
+    driver: bridge
+    external: true
