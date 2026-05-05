@@ -27,7 +27,7 @@ class StudentRegistrationView(CreateView):
     # Assing students to Students group for proper persmissions
     user.is_students = True
     user.save()
-    group = Group.objects.get(name="Students")
+    group = Group.objects.get(name="students")
     user.groups.add(group)
     login(self.request, user)
     return result
@@ -46,7 +46,7 @@ class TeacherRegisterView(CreateView):
     # Assing intructors to Instructors group for proper persmissions
     user.is_students = True
     user.save()
-    group = Group.objects.get(name="Instructors")
+    group = Group.objects.get(name="teachers")
     user.groups.add(group)
     login(self.request, user)
     return result
