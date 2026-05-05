@@ -12,3 +12,4 @@ templatestags/__init__.py
 db.sqlite3
 venv/
 .env
+.idea/
