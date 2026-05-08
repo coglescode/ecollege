@@ -4,69 +4,134 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-        <title>{% block title %} Ecollege {% endblock %}</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-        <link href="{% static 'ecollege/css/main.css' %}" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Ecollege | Master New Skills Online</title>
+		<!-- Tailwind Play CDN. Trying Tailwind in the browser -->
+    	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<!-- Tailwind UI Elements -->
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+		<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+ 		<!-- link href="{% static 'ecollege/css/main.css' %}" rel="stylesheet" -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    </head>
-    <body>
-        <div class=" py-4 bg-light">           
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="{% url 'index' %}">Ecollege</a>
+ 		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+			body { font-family: 'Inter', sans-serif; }
+			.no-scrollbar::-webkit-scrollbar { display: none; }
+			.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+			.carousel-container { scroll-behavior: smooth; }
+    	</style>
 
+		<!-- link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" -->
+        <!-- link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" -->
+
+	</head>
+
+	<body class="bg-gray-50 text-gray-900">
+		<nav class="fixed w-full z-50 transition-all duration-300 bg-black/20 backdrop-blur-sm border-b border-white/10">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="flex justify-between h-20 items-center">
+					<div class="flex items-center gap-2">
+						<div class="bg-indigo-600 p-2 rounded-lg">
+							<i class="fas fa-graduation-cap text-white text-lg"></i>
+						</div>
+						<a href="{% url 'index' %}">
+							<span class="text-2xl font-bold tracking-tight text-white">Ecollege</span>
+						</a>
+					</div>
+					<div class="md:hidden">
+						<button class="text-white text-2xl">
+							<i class="fas fa-bars"></i>
+						</button>
+					</div>
+					<div class="hidden md:flex space-x-8 items-center">
+						{% if user.is_authenticated %}
+							<a class="text-white/80 hover:text-white transition" id="{{ user.username }}" href="{% url 'user_course_list' %}"><strong>{{ user.username }}</strong></a>
+							<a class="text-white/80 hover:text-white transition"  href="{% url 'manage_course_list' %}">Content</a>
+
+							<form id="logout-form" method="post" action="{% url 'logout' %}">
+								{% csrf_token %}
+								<button type="submit">Log out</button>
+							</form>
+						{% else %}
+							<a class="text-white/80 hover:text-indigo-400 transition" href="{% url 'course_list'  %}">All courses</a>
+							<a class="text-white/80 hover:text-indigo-400 transition" href="{% url 'login' %}">Log In</a>
+							<a class="text-white/80 hover:text-white transition" href="{% url 'student_registration' %}">
+								<button class="bg-indigo-600 text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:text-indigo-600 transition shadow-lg">
+									Join Free
+								</button>
+							</a>
+						{% endif %}
+
+						<!--
+						<a href="#" class="text-white/80 hover:text-white transition">Courses</a>
+						<a href="#" class="text-white/80 hover:text-white transition">Mentors</a>
+						-->
+
+					</div>
+            	</div>
+
+				<!-- My old navbar
+            	<div class="container-fluid">
                     <a href="javascript:void(0);" class="navbar-toggler border-0 h1" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <i id="mobileMenu" class="bi bi-list "></i>
                     </a>
-                    
-                    <div class="collapse navbar-collapse"  id="navbarTogglerDemo01">
-                        <ul id="navbar" class="navbar-nav align-items-end h5 ">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'course_list'  %}">All courses</a>
-                            </li>
-                            {% if user.is_authenticated %}
-                              
-                                <li class="nav-item">
-                                    <a class="nav-link user" id="{{ user.username }}" href="{% url 'user_course_list' %}"><strong>{{ user.username }}</strong></a>
-                                </li>   
-                                <li class="nav-item">
-                                    <a class="nav-link user"  href="{% url 'manage_course_list' %}">Content</a>
-                                </li>
-                                                    
-                                <li class="nav-item">
-                                    <form id="logout-form" method="post" action="{% url 'logout' %}">
-                                        {% csrf_token %}
-                                        <button type="submit">Log out</button>
-                                      </form>
-                                </li>
-                            {% else %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'student_registration' %}">Register</a>                                    
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </div>
-            </nav> 
-        </div>
+                </div>-->
+            </div>
+        </nav>
 
-        
         {% block content %}                      
         {% endblock %}
 
-        
-        
-        <footer class="col-12 footer d-flex align-items-center justify-content-center pt-5"> 
-            <h5 class="">
-                <a href="https://github.com/coglescode/capstone"><i class="bi bi-github mx-2"></i>capstone</a>   
-            </h5>         
-        </footer>
+		<!-- Footer -->
+		<footer class="bg-gray-50 border-t border-gray-200 pt-16 pb-12">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 text-center md:text-left">
+					<div class="space-y-6">
+						<div class="flex items-center justify-center md:justify-start gap-2">
+							<div class="bg-indigo-600 p-2 rounded-lg">
+								<i class="fas fa-graduation-cap text-white text-sm"></i>
+							</div>
+							<span class="text-xl font-bold">Ecollege</span>
+						</div>
+						<p class="text-gray-500 text-sm leading-relaxed">
+							This platform is not a finished product. Contact the developer for more information.
+						</p>
+						<div class="flex justify-center md:justify-start gap-4">
+							<a href="https://github.com/coglescode/ecollege/tree/main" class="text-gray-400 hover:text-indigo-600"><i class="fab fa-github"></i></a>
+							<!-- a href="#" class="text-gray-400 hover:text-indigo-600"><i class="fab fa-twitter"></i></a -->
+							<a href="https://www.linkedin.com/in/leonard-cogles-bonne/" class="text-gray-400 hover:text-indigo-600"><i class="fab fa-linkedin"></i></a>
+						</div>
+					</div>
+					<div>
+						<h5 class="font-bold mb-6">Explore</h5>
+						<ul class="space-y-4 text-sm text-gray-500">
+							<li><a href="{% url 'course_list' %}" class="hover:text-indigo-600">Courses</a></li>
+							<!-- li><a href="#" class="hover:text-indigo-600">Categories</a></li -->
+							<li><a href="{% url 'teacher_registration' %}" class="hover:text-indigo-600">Instructors</a></li>
+						</ul>
+					</div>
+					<div>
+						<h5 class="font-bold mb-6">Support</h5>
+						<ul class="space-y-4 text-sm text-gray-500">
+							<li><a href="#" class="hover:text-indigo-600">Help Center</a></li>
+							<li><a href="#" class="hover:text-indigo-600">Contact Us</a></li>
+							<li><a href="#" class="hover:text-indigo-600">Privacy Policy</a></li>
+						</ul>
+					</div>
+					<div>
+						<h5 class="font-bold mb-6">Newsletter</h5>
+						<div class="flex flex-col gap-3">
+							<input type="email" placeholder="Enter your email" class="bg-white border border-gray-200 px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+							<button class="bg-indigo-600 text-white px-4 py-3 rounded-xl text-sm font-bold">Subscribe</button>
+						</div>
+					</div>
+				</div>
+				<div class="text-center text-gray-400 text-xs">
+					&copy; 2024 Ecollege Platform. All rights reserved.
+				</div>
+			</div>
+		</footer>
        
         {% block script %}      
             <script src="{% static 'ecollege/main.js' %}"></script>
@@ -75,4 +140,4 @@
         <!--Js bundle-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
-</html
+</html>

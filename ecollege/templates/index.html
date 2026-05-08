@@ -2,46 +2,119 @@
 {% load static %}
 
 {% block content %}
-    <div class=" image">      
-      <div class="hero-text">
-        <p>We have all the courses you want.</p>
-      </div>    
-    </div>
 
-    <div class="d-flex align-items-center justify-content-around py-5">    
-      <div class="call_action_div py-xl-5 text-center">
-        <p class="py-lg-4">All our programs are free.</p>
-        <div id="call_action_btn" class="text-light py-5">
-          <a class="rounded-pill p-4 p-lg-5" href="{% url 'course_list' %}">Browse courses</a>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Section of Subjects list-->
-    <div class="text-center">
-      <h1 class="display-4">Subjects</h1> 
-      <div id="subject_card" class="border-0   d-flex flex-wrap  justify-content-center my-5 ">
-        {% for s in subjects %}    
-          <div id="subject_link" class="col-8 col-sm-4 col-md-4 col-lg-3 col-xl-2 card text-center m-2 m-sm-4 m-xl-5 p-4 p-sm-3 p-md-4 p-lg-5 h-md-75 d-flex flex-row  justify-content-center  fs-3 shadow-sm" >       
-            <a  href="{% url 'course_list_subject' s.slug %}">
-              {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
-            </a>     
-          </div>
-        {% empty %}       
-          <h2> We are working to add courses right now. Be patient!</h2>
-        {% endfor %}
-      </div>
-    </div>
+    <!-- Hero Section (Full Screen) -->
+    <section class="relative h-screen w-full overflow-hidden ">
+        <!-- Background Image with Overlay -->
+		<div class="absolute inset-0 z-0 bg-[url(/static/ecollege/images/clay-banks-nYToduYJH-c-unsplash.jpg)]
+			  w-full h-full bg-contain bg-no-repeat bg-center bg-cover">
+			<div class="absolute inset-0 bg-black/60 backdrop-brightness-75"></div>
+		</div>
 
-    <div class=" container-fluid d-flex flex-wrap bg-success justify-content-xl-center align-items-md-center py-5">    
-        <figure class=" col-md-6 col-xl-4">
-          <img class="img-fluid rounded shadow-sm" src="/static/ecollege/images/pexels-christina-morillo-1181398.jpg" alt="">
-        </figure>
-        <div id="call_action_btn" class="col-md-6 col-xl-4 d-flex flex-wrap justify-content-center align-content-md-center p-4 ">
-          <p class="text-white fs-2 text-center fw-normal text-wrap lh-base">Are you passionate to teach others?</p>
-          <a class=" rounded-pill mt-4  m-md-0 m-lg-4 p-4 px-xl-5 " href="{% url 'teacher_registration' %}"> Teach now!</a>
+		<!-- Centered content -->
+		<div class="relative z-10 w-full pt-30 sm:pt-25 md:pt-40 max-w-4xl px-6 mx-auto text-center text-white">
+			<span class="inline-block px-4 py-1 mb-6 text-xs font-bold tracking-widest text-indigo-300 uppercase border border-indigo-300/30 bg-indigo-500/10 rounded-full backdrop-blur-md">
+				Start Your Journey Today
+			</span>
+			<h1 class="text-4xl md:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
+				All our courses <br><span class="text-indigo-400">Are free.</span>
+			</h1>
+			<p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
+				Unlock your potential with expert-led courses. Join millions of students mastering new skills every day.
+			</p>
+
+			<!-- Bottom Actions -->
+			<div class="flex flex-col sm:flex-row gap-4 pb-0 sm:pt-2 justify-center items-center">
+				<a class="w-full sm:w-auto bg-indigo-600 text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-indigo-700 transition transform hover:scale-105 shadow-2xl shadow-indigo-500/20"
+				   href="{% url 'login' %}"> Get Started Now
+				</a>
+				<a class="w-full sm:w-auto bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-white/20 transition"
+				   href="{% url 'course_list' %}">
+					Explore Courses
+				</a>
+			</div>
+		</div>
+	</section>
+
+    <!-- Course Subjects Section -->
+    <section class="py-20 bg-white">
+		<div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Trending Categories</h2>
+                <p class="text-gray-500">Pick a subject and start mastering it today.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Subject Cards -->
+				<div class="group p-6 rounded-3xl border border-gray-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all duration-300">
+                    {% for s in subjects %}
+
+						<a  href="{% url 'course_list_subject' s.slug %}">
+						  	<h3 class="text-xl font-bold mb-2">{{ s.title }}</h3>
+							<p class="text-gray-500 text-sm">{{ s.total_courses }} courses.</p>
+						</a>
+					{% empty %}
+					  <h2> We are working to add courses right now. Be patient!</h2>
+					{% endfor %}
+
+					<!-- div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-laptop-code text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Web Development</h3>
+                    <p class="text-gray-500 text-sm">HTML, CSS, React, and Backend architecture.</p -->
+                </div>
+
+                <div class="group p-6 rounded-3xl border border-gray-100 hover:border-purple-100 hover:bg-purple-50/30 transition-all duration-300">
+                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-bezier-curve text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">UI/UX Design</h3>
+                    <p class="text-gray-500 text-sm">Figma, Adobe XD, and User Centric Research.</p>
+                </div>
+                <div class="group p-6 rounded-3xl border border-gray-100 hover:border-emerald-100 hover:bg-emerald-50/30 transition-all duration-300">
+                    <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-coins text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Digital Marketing</h3>
+                    <p class="text-gray-500 text-sm">SEO, Analytics, and Social Media Strategy.</p>
+                </div>
+                <div class="group p-6 rounded-3xl border border-gray-100 hover:border-orange-100 hover:bg-orange-50/30 transition-all duration-300">
+                    <div class="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-brain text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Artificial Intelligence</h3>
+                    <p class="text-gray-500 text-sm">Machine Learning and Data Science basics.</p>
+                </div>
+            </div>
         </div>
-    </div>
-    
+    </section>
+
+	<!-- Educator Section -->
+    <section class="py-24 bg-gray-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
+            <div class="w-full md:w-1/2">
+                <img src="/static/ecollege/images/pexels-christina-morillo-1181398.jpg"
+                     class="rounded-[2.5rem] shadow-2xl" alt="Educator">
+            </div>
+            <div class="w-full md:w-1/2 text-center md:text-left">
+                <h2 class="text-4xl font-bold mb-6">Become an Instructor</h2>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                    Share your knowledge with millions of people. We provide the tools to build, market, and sell your courses globally.
+                </p>
+                <div class="grid grid-cols-2 gap-6 mb-10 text-left">
+                    <div class="bg-gray-800 p-4 rounded-2xl">
+                        <h4 class="font-bold text-indigo-400 text-xl mb-1">Global</h4>
+                        <p class="text-xs text-gray-500">Reach students in 190 countries</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-2xl">
+                        <h4 class="font-bold text-indigo-400 text-xl mb-1">Flexible</h4>
+                        <p class="text-xs text-gray-500">Teach whenever and however you want</p>
+                    </div>
+                </div>
+				<a class="w-full md:w-auto bg-white text-gray-900 px-8 py-4 rounded-2xl font-bold hover:bg-gray-100 transition"
+				   href="{% url 'teacher_registration' %}"> Teach now!</a>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}
