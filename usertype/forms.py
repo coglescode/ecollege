@@ -17,8 +17,8 @@ class UserRegisterForm(UserCreationForm):
       fields = ['username', 'password1', 'password2']
     
     def __init__(self, *args, **kwargs):
-            super(UserRegisterForm, self).__init__(*args, **kwargs)
+      super(UserRegisterForm, self).__init__(*args, **kwargs)
+
+      for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'input-focus w-full bg-zinc-50 border border-zinc-200 rounded-2xl py-4 pl-11 pr-12 text-base focus:outline-none focus:border-indigo-500'
             
-            for field_name, field in self.fields.items():
-                  field.widget.attrs['class'] = 'form-control form-control-md shadow-sm '
-                  
