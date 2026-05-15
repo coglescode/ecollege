@@ -54,6 +54,52 @@
             </div>
         </div>
 
+
+        <div class="bg-pink-500">
+            <h1>
+              {% if subject %}
+                {{ subject.title }} courses
+              {% else %}
+                <div class="bg-cyan-500 text-white"> All courses</div>
+              {% endif %}
+            </h1>
+
+            <h4 class="dropdown-toggle p-2"{% if not subject %}class="selected"{% endif %}
+                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> Subjects </h4>
+
+            <a id="all_link" class="p-4" href="{% url 'course_list' %}">All</a>
+
+              <ul id="modules" class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                {% for s in subjects %}
+                  <li {% if subject == s %}class="selected"{% endif %}>
+                    <a href="{% url 'course_list_subject' s.slug %}">
+                      {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+        </div>
+
+
+        <div class="mt-30 module">
+          <div id="courses_card">
+            {% for course in courses %}
+              {% with subject=course.subject %}
+                <div id="course_div" class="card shadow-sm">
+                  <h3><a href="{% url 'course_detail' course.slug %}" > {{ course.title }} </a></h3>
+                  <p><a href="{% url 'course_list_subject' subject.slug %}"> {{ subject}} </a>
+                    {{ course.total_modules }} modules.
+                    Instructor: {{ course.owner.get_full_name }}
+                  </p>
+                </div>
+              {% endwith %}
+            {% empty %}
+                <p>No courses found yet for this subject. </p>
+             <p><a href="{% url 'course_create' %}" class="button">Create new course</a></p>
+            {% endfor %}
+          </div>
+        </div>
+
         <!-- Subject Cards Grid -->
         <div class="subject-grid">
 
@@ -75,7 +121,7 @@
                 </a>
             </div>
 
-            <!-- Subject Card: Business Management -->
+            <!-- Subject Card: Business Management
             <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-1 transition-all duration-300">
                 <div class="flex justify-between items-start mb-8">
                     <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
@@ -93,7 +139,7 @@
                 </a>
             </div>
 
-            <!-- Subject Card: Digital Design -->
+            Subject Card: Digital Design
             <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-1 transition-all duration-300">
                 <div class="flex justify-between items-start mb-8">
                     <div class="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
@@ -111,7 +157,7 @@
                 </a>
             </div>
 
-            <!-- Subject Card: Data Science -->
+             Subject Card: Data Science
             <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 transition-all duration-300">
                 <div class="flex justify-between items-start mb-8">
                     <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
@@ -129,7 +175,7 @@
                 </a>
             </div>
 
-            <!-- Subject Card: Marketing -->
+             Subject Card: Marketing
             <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-pink-500/10 hover:-translate-y-1 transition-all duration-300">
                 <div class="flex justify-between items-start mb-8">
                     <div class="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-pink-600 group-hover:bg-pink-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
@@ -147,7 +193,7 @@
                 </a>
             </div>
 
-            <!-- Subject Card: Humanities -->
+             Subject Card: Humanities
             <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300">
                 <div class="flex justify-between items-start mb-8">
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
@@ -165,6 +211,7 @@
                 </a>
             </div>
         </div>
+        -->
 
         <!-- Banner CTA -->
         <div class="mt-24 rounded-[3rem] p-1 shadow-2xl shadow-indigo-200/50 bg-gradient-to-r from-indigo-600 to-purple-600">
