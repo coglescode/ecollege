@@ -1,5 +1,4 @@
 {% extends "layout.html" %}
-
 {% load static %}
 
  
@@ -11,55 +10,227 @@
   {% endif %}
 {% endblock %}
 
+
 {% block content %}
+
+	  <!-- Header Section -->
+    <header class="bg-white border-b border-slate-100 pt-30 pb-5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <span class="inline-block px-3 py-1 mb-4 text-[10px] font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 rounded-lg">
+                    Discover Your Next Skill
+                </span>
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Explore our world-class <br><span class="text-indigo-600">Learning Catalog</span></h1>
+                <p class="text-lg text-slate-500 mb-10 leading-relaxed">Whether you're looking to switch careers or master a specific hobby, we have the right subject for you taught by industry leaders.</p>
+
+                <!-- Search Bar
+                <div class="relative group max-w-xl">
+                    <span class="absolute inset-y-0 left-0 pl-5 flex items-center text-slate-400 group-focus-within:text-indigo-600 transition-colors">
+                        <i class="fas fa-search text-lg"></i>
+                    </span>
+                    <input type="text"
+                           placeholder="What do you want to learn today?"
+                           class="w-full pl-12 pr-4 py-5 bg-slate-50 border border-slate-200 rounded-[1.25rem] focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 focus:bg-white outline-none transition-all shadow-sm">
+                </div>
+                -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Filter Tabs -->
+        <div class="flex items-center justify-between mb-10">
+            <div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar">
+                <button class="filter-pill active-filter whitespace-nowrap px-6 py-2.5 rounded-xl border border-transparent font-bold text-sm transition">All Topics</button>
+                <button class="filter-pill whitespace-nowrap px-6 py-2.5 rounded-xl border border-slate-200 bg-white font-bold text-sm text-slate-600 transition hover:border-indigo-200">Tech & Code</button>
+                <button class="filter-pill whitespace-nowrap px-6 py-2.5 rounded-xl border border-slate-200 bg-white font-bold text-sm text-slate-600 transition hover:border-indigo-200">Business</button>
+                <button class="filter-pill whitespace-nowrap px-6 py-2.5 rounded-xl border border-slate-200 bg-white font-bold text-sm text-slate-600 transition hover:border-indigo-200">Design</button>
+                <button class="filter-pill whitespace-nowrap px-6 py-2.5 rounded-xl border border-slate-200 bg-white font-bold text-sm text-slate-600 transition hover:border-indigo-200">Data Science</button>
+            </div>
+            <div class="hidden md:block text-sm text-slate-400 font-medium">
+                Showing <span class="text-slate-900 font-bold">12</span> major categories
+            </div>
+        </div>
+
+        <!-- Subject Cards Grid -->
+        <div class="subject-grid">
+
+            <!-- Subject Card: Computer Science -->
+            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-1 transition-all duration-300">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
+                        <i class="fas fa-terminal text-2xl"></i>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
+                        <span class="text-lg font-bold text-slate-900">84+</span>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Computer Science</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">Build software, learn cloud architecture, and master modern programming stacks.</p>
+                <a href="register.html" class="inline-flex items-center gap-2 text-indigo-600 font-bold hover:gap-4 transition-all">
+                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Subject Card: Business Management -->
+            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-1 transition-all duration-300">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
+                        <i class="fas fa-chart-pie text-2xl"></i>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
+                        <span class="text-lg font-bold text-slate-900">126+</span>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Business & Strategy</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">MBA-level insights into leadership, finance, and global market operations.</p>
+                <a href="register.html" class="inline-flex items-center gap-2 text-emerald-600 font-bold hover:gap-4 transition-all">
+                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Subject Card: Digital Design -->
+            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-1 transition-all duration-300">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
+                        <i class="fas fa-palette text-2xl"></i>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
+                        <span class="text-lg font-bold text-slate-900">45+</span>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">UI/UX Design</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">Create beautiful, functional interfaces. Master Figma, Adobe CC, and Research.</p>
+                <a href="register.html" class="inline-flex items-center gap-2 text-purple-600 font-bold hover:gap-4 transition-all">
+                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Subject Card: Data Science -->
+            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 transition-all duration-300">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
+                        <i class="fas fa-robot text-2xl"></i>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
+                        <span class="text-lg font-bold text-slate-900">92+</span>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">AI & Data Science</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">Predict the future with data. Master Python, ML, and Deep Learning models.</p>
+                <a href="register.html" class="inline-flex items-center gap-2 text-orange-600 font-bold hover:gap-4 transition-all">
+                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Subject Card: Marketing -->
+            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-pink-500/10 hover:-translate-y-1 transition-all duration-300">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-pink-600 group-hover:bg-pink-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
+                        <i class="fas fa-bullhorn text-2xl"></i>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
+                        <span class="text-lg font-bold text-slate-900">58+</span>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Growth Marketing</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">Learn digital acquisition, SEO, and branding in the modern age.</p>
+                <a href="register.html" class="inline-flex items-center gap-2 text-pink-600 font-bold hover:gap-4 transition-all">
+                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Subject Card: Humanities -->
+            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300">
+                <div class="flex justify-between items-start mb-8">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
+                        <i class="fas fa-book-open text-2xl"></i>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
+                        <span class="text-lg font-bold text-slate-900">110+</span>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Liberal Arts</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">Philosophy, Sociology, and Literature from global academic experts.</p>
+                <a href="register.html" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:gap-4 transition-all">
+                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Banner CTA -->
+        <div class="mt-24 rounded-[3rem] p-1 shadow-2xl shadow-indigo-200/50 bg-gradient-to-r from-indigo-600 to-purple-600">
+            <div class="bg-white rounded-[2.9rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10">
+                <div class="max-w-xl text-center md:text-left">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Start your learning journey for free</h2>
+                    <p class="text-slate-500 text-lg">Join 50,000+ students already advancing their careers with EduFlow. No credit card required to start.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                    <a href="register.html" class="bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-indigo-700 transition text-center shadow-lg shadow-indigo-200">Create Free Account</a>
+                    <a href="login.html" class="bg-slate-50 text-slate-900 px-8 py-4 rounded-2xl font-bold hover:bg-slate-100 transition text-center border border-slate-200">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
   
+    <!--Side bar of subjects
+    <div >
+
+
     <h1>
-      {% if subject %} 
-        {{ subject.title }} courses 
-      {% else %}
+      { if subject %}
+        { subject.title }} courses a
+      { else %}
         All courses
-      {% endif %}        
+      { endif %}
     </h1>
 
-  
-    <!--Side bar of subjects -->
-    <div class="navbar contents d-flex align-items-center justify-content-center ">
 
-      <h4 class="dropdown-toggle p-2"{% if not subject %}class="selected"{% endif %} 
+      <h4 class="dropdown-toggle p-2"{ if not subject %}class="selected"{ endif %}
         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> Subjects </h4>
 
-      <a id="all_link" class="p-4" href="{% url 'course_list' %}">All</a>
+      <a id="all_link" class="p-4" href="{ url 'course_list' %}">All</a>
 
       <ul id="modules" class="dropdown-menu " aria-labelledby="dropdownMenuButton1">      
-        {% for s in subjects %}
-          <li {% if subject == s %}class="selected"{% endif %}>
-            <a href="{% url 'course_list_subject' s.slug %}">
-              {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
+        { for s in subjects %}
+          <li { if subject == s %}class="selected"{ endif %}>
+            <a href="{ url 'course_list_subject' s.slug %}">
+              { s.title }}<br><span>{ s.total_courses }} courses</span>
             </a>
           </li>
-        {% endfor %}
+        { endfor %}
       </ul>
     </div>
 
-    <!--Main content where all courses displays-->
-    <div class="module">
+
+    <div class="mt-30 module">
       <div id="courses_card">
-        {% for course in courses %}
-          {% with subject=course.subject %}
+        { for course in courses %}
+          { with subject=course.subject %}
             <div id="course_div" class="card shadow-sm">
-              <h3><a href="{% url 'course_detail' course.slug %}" > {{ course.title }} </a></h3>
-              <p><a href="{% url 'course_list_subject' subject.slug %}"> {{ subject}} </a>
-                {{ course.total_modules }} modules.
-                Instructor: {{ course.owner.get_full_name }}
+              <h3><a href="{ url 'course_detail' course.slug %}" > { course.title }} </a></h3>
+              <p><a href="{ url 'course_list_subject' subject.slug %}"> { subject}} </a>
+                { course.total_modules }} modules.
+                Instructor: { course.owner.get_full_name }}
               </p>
             </div>
-          {% endwith %}
-        {% empty %}
+          { endwith %}
+        { empty %}
             <p>No courses found yet for this subject. </p>
-            <!-- p><a href="{% url 'course_create' %}" class="button">Create new course</a></p -->
-        {% endfor %}
+         p><a href="{ url 'course_create' %}" class="button">Create new course</a></p
+        { endfor %}
       </div>
     </div>
+-->
 
 {% endblock %}
 

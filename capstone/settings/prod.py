@@ -6,15 +6,15 @@ from dotenv import load_dotenv
 load_dotenv('.env')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
-SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG_PROD')
+SECRET_KEY = os.getenv('SECRET_KEY_PROD')
 
 #ADMINS = [
 #    ('Antonio M', 'email@mydomain.com'),
 #]
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_PROD', '').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS_PROD', '').split(',')
 
 DATABASE_SCHEMAS = ['test', 'public']
 
@@ -31,3 +31,14 @@ DATABASES = {
        }
    }
 }
+
+# HTTPS Settings in setting.py
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+# HSTS Settings
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_SECONDS = 31563000
+SECURE_HSTS_RELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
