@@ -2,282 +2,137 @@
 {% load static %}
 
  
-{% block title %}
-  {% if subject %}
-    {{ subject.title }} courses
-  {% else %}
-    All courses
-  {% endif %}
-{% endblock %}
-
-
 {% block content %}
 
-	  <!-- Header Section -->
-    <header class="bg-white border-b border-slate-100 pt-30 pb-5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl">
-                <span class="inline-block px-3 py-1 mb-4 text-[10px] font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 rounded-lg">
-                    Discover Your Next Skill
-                </span>
-                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Explore our world-class <br><span class="text-indigo-600">Learning Catalog</span></h1>
-                <p class="text-lg text-slate-500 mb-10 leading-relaxed">Whether you're looking to switch careers or master a specific hobby, we have the right subject for you taught by industry leaders.</p>
+	<!-- Header Section -->
+	<header class="bg-white border-b border-slate-100 pt-30 pb-5">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl">
+				<span class="inline-block px-3 py-1 mb-4 text-[10px] font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 rounded-lg">
+					Discover Your Next Skill
+				</span>
+				<h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Explore our world-class <br><span class="text-indigo-600">Learning Catalog</span></h1>
+				<p class="text-lg text-slate-500 mb-10 leading-relaxed">Whether you're looking to switch careers or master a specific hobby, we have the right subject for you taught by industry leaders.</p>
 
-                <!-- Search Bar
-                <div class="relative group max-w-xl">
-                    <span class="absolute inset-y-0 left-0 pl-5 flex items-center text-slate-400 group-focus-within:text-indigo-600 transition-colors">
-                        <i class="fas fa-search text-lg"></i>
-                    </span>
-                    <input type="text"
-                           placeholder="What do you want to learn today?"
-                           class="w-full pl-12 pr-4 py-5 bg-slate-50 border border-slate-200 rounded-[1.25rem] focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 focus:bg-white outline-none transition-all shadow-sm">
-                </div>
-                -->
+			</div>
+		</div>
+	</header>
+
+	<div class="max-w-[1600px] mx-auto flex flex-col md:flex-row min-h-[calc(100vh-64px)]">
+
+        <!-- Left Sidebar Navigation -->
+        <aside class="w-full md:w-72 bg-white border-r border-slate-200 sticky md:top-16 md:h-[calc(100vh-64px)] overflow-y-auto custom-scrollbar z-40">
+            <div class="p-6">
+                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 px-4">Course Subjects</h2>
+
+                <nav class="space-y-1" id="subject-nav">
+
+					<a id="all_link" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all hover:bg-slate-50 group text-slate-500 text-slate-600 font-medium" href="{% url 'course_list' %}">
+						<i class="fas fa-layer-group w-5 text-center group-hover:text-indigo-600"></i>
+						All subjects
+						<button {% if not subject %} class="selected" {% endif %} id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+						</button>
+					</a>
+
+                    	<!-- List of subjects with a counter -->
+						<!-- ul id="modules" class="dropdown-menu " aria-labelledby="dropdownMenuButton1" -->
+						{% for s in subjects %}
+						  <!-- li { if subject == s %}class="selected"{ endif %} -->
+						  <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all hover:bg-slate-50 group text-slate-500">
+							<a
+							   href="{% url 'course_list_subject' s.slug %}">
+							  {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
+							</a>
+						  </button>
+						  <!-- /li -->
+						{% endfor %}
+					<!-- /ul -->
+                </nav>
             </div>
-        </div>
-    </header>
+        </aside>
 
-    <!-- Content Area -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Right Side Content -->
+        <main class="flex-1 bg-slate-50 p-6 md:p-10">
+			<!-- Header for Right Content -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div>
+					{% if subject %}
+						<nav class="flex text-xs text-slate-400 mb-2 gap-2">
+							<span class="hover:text-indigo-600 cursor-pointer">Courses</span>
+							<span>/</span>
+							<span id="breadcrumb-subject" class="text-slate-600 font-medium">{{ subject.title }}</span>
+						</nav>
+						<!-- h1 id="active-subject-title" class="text-3xl font-bold text-slate-900 tracking-tight">All Courses</h1 -->
+						<h1 id="active-subject-title" class="text-3xl font-bold text-slate-900 tracking-tight">{{ subject.title }} courses </h1>
+				  	{% else %}
+						<nav class="flex text-xs text-slate-400 mb-2 gap-2">
+							<span class="hover:text-indigo-600 cursor-pointer">Courses</span>
+							<span>/</span>
+							<span id="breadcrumb-subject" class="text-slate-600 font-medium">All courses</span>
+						</nav>
 
-        <!-- Filter Tabs -->
-        <div class="flex items-center justify-between mb-10">
-            <div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar">
-                <button class="filter-pill active-filter whitespace-nowrap px-6 py-2.5 rounded-xl border border-transparent font-bold text-sm transition">All Topics</button>
-                <button class="filter-pill whitespace-nowrap px-6 py-2.5 rounded-xl border border-slate-200 bg-white font-bold text-sm text-slate-600 transition hover:border-indigo-200">Tech & Code</button>
-                <button class="filter-pill whitespace-nowrap px-6 py-2.5 rounded-xl border border-slate-200 bg-white font-bold text-sm text-slate-600 transition hover:border-indigo-200">Business</button>
-                <button class="filter-pill whitespace-nowrap px-6 py-2.5 rounded-xl border border-slate-200 bg-white font-bold text-sm text-slate-600 transition hover:border-indigo-200">Design</button>
-                <button class="filter-pill whitespace-nowrap px-6 py-2.5 rounded-xl border border-slate-200 bg-white font-bold text-sm text-slate-600 transition hover:border-indigo-200">Data Science</button>
-            </div>
-            <div class="hidden md:block text-sm text-slate-400 font-medium">
-                Showing <span class="text-slate-900 font-bold">12</span> major categories
-            </div>
-        </div>
-
-
-        <div class="bg-pink-500">
-            <h1>
-              {% if subject %}
-                {{ subject.title }} courses
-              {% else %}
-                <div class="bg-cyan-500 text-white"> All courses</div>
-              {% endif %}
-            </h1>
-
-            <h4 class="dropdown-toggle p-2"{% if not subject %}class="selected"{% endif %}
-                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> Subjects </h4>
-
-            <a id="all_link" class="p-4" href="{% url 'course_list' %}">All</a>
-
-              <ul id="modules" class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                {% for s in subjects %}
-                  <li {% if subject == s %}class="selected"{% endif %}>
-                    <a href="{% url 'course_list_subject' s.slug %}">
-                      {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-        </div>
-
-
-        <div class="mt-30 module">
-          <div id="courses_card">
-            {% for course in courses %}
-              {% with subject=course.subject %}
-                <div id="course_div" class="card shadow-sm">
-                  <h3><a href="{% url 'course_detail' course.slug %}" > {{ course.title }} </a></h3>
-                  <p><a href="{% url 'course_list_subject' subject.slug %}"> {{ subject}} </a>
-                    {{ course.total_modules }} modules.
-                    Instructor: {{ course.owner.get_full_name }}
-                  </p>
+						<h1 id="active-subject-title" class="text-3xl font-bold text-slate-900 tracking-tight">All Courses</h1>
+			 		{% endif %}
                 </div>
-              {% endwith %}
-            {% empty %}
-                <p>No courses found yet for this subject. </p>
-             <p><a href="{% url 'course_create' %}" class="button">Create new course</a></p>
-            {% endfor %}
-          </div>
-        </div>
 
-        <!-- Subject Cards Grid -->
-        <div class="subject-grid">
-
-            <!-- Subject Card: Computer Science -->
-            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-1 transition-all duration-300">
-                <div class="flex justify-between items-start mb-8">
-                    <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
-                        <i class="fas fa-terminal text-2xl"></i>
-                    </div>
-                    <div class="text-right">
-                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
-                        <span class="text-lg font-bold text-slate-900">84+</span>
-                    </div>
-                </div>
-                <h3 class="text-2xl font-bold mb-3">Computer Science</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">Build software, learn cloud architecture, and master modern programming stacks.</p>
-                <a href="register.html" class="inline-flex items-center gap-2 text-indigo-600 font-bold hover:gap-4 transition-all">
-                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
-                </a>
+				<!-- Tab for sorting courses inside header for right main content -->
+                <div class="flex items-center gap-3">
+                    <label class="text-xs font-bold text-slate-400 uppercase">Sort by:</label>
+					<label>
+						<select class="bg-white border border-slate-200 text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500">
+							<option>Most Popular</option>
+							<option>Newest</option>
+							<option>Highest Rated</option>
+						</select>
+					</label>
+				</div>
             </div>
 
-            <!-- Subject Card: Business Management
-            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-1 transition-all duration-300">
-                <div class="flex justify-between items-start mb-8">
-                    <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
-                        <i class="fas fa-chart-pie text-2xl"></i>
-                    </div>
-                    <div class="text-right">
-                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
-                        <span class="text-lg font-bold text-slate-900">126+</span>
-                    </div>
-                </div>
-                <h3 class="text-2xl font-bold mb-3">Business & Strategy</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">MBA-level insights into leadership, finance, and global market operations.</p>
-                <a href="register.html" class="inline-flex items-center gap-2 text-emerald-600 font-bold hover:gap-4 transition-all">
-                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
-                </a>
-            </div>
-
-            Subject Card: Digital Design
-            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-1 transition-all duration-300">
-                <div class="flex justify-between items-start mb-8">
-                    <div class="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
-                        <i class="fas fa-palette text-2xl"></i>
-                    </div>
-                    <div class="text-right">
-                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
-                        <span class="text-lg font-bold text-slate-900">45+</span>
-                    </div>
-                </div>
-                <h3 class="text-2xl font-bold mb-3">UI/UX Design</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">Create beautiful, functional interfaces. Master Figma, Adobe CC, and Research.</p>
-                <a href="register.html" class="inline-flex items-center gap-2 text-purple-600 font-bold hover:gap-4 transition-all">
-                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
-                </a>
-            </div>
-
-             Subject Card: Data Science
-            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 transition-all duration-300">
-                <div class="flex justify-between items-start mb-8">
-                    <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
-                        <i class="fas fa-robot text-2xl"></i>
-                    </div>
-                    <div class="text-right">
-                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
-                        <span class="text-lg font-bold text-slate-900">92+</span>
-                    </div>
-                </div>
-                <h3 class="text-2xl font-bold mb-3">AI & Data Science</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">Predict the future with data. Master Python, ML, and Deep Learning models.</p>
-                <a href="register.html" class="inline-flex items-center gap-2 text-orange-600 font-bold hover:gap-4 transition-all">
-                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
-                </a>
-            </div>
-
-             Subject Card: Marketing
-            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-pink-500/10 hover:-translate-y-1 transition-all duration-300">
-                <div class="flex justify-between items-start mb-8">
-                    <div class="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-pink-600 group-hover:bg-pink-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
-                        <i class="fas fa-bullhorn text-2xl"></i>
-                    </div>
-                    <div class="text-right">
-                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
-                        <span class="text-lg font-bold text-slate-900">58+</span>
-                    </div>
-                </div>
-                <h3 class="text-2xl font-bold mb-3">Growth Marketing</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">Learn digital acquisition, SEO, and branding in the modern age.</p>
-                <a href="register.html" class="inline-flex items-center gap-2 text-pink-600 font-bold hover:gap-4 transition-all">
-                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
-                </a>
-            </div>
-
-             Subject Card: Humanities
-            <div class="group bg-white rounded-[2rem] border border-slate-200 p-8 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300">
-                <div class="flex justify-between items-start mb-8">
-                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 transform group-hover:rotate-6">
-                        <i class="fas fa-book-open text-2xl"></i>
-                    </div>
-                    <div class="text-right">
-                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-tighter">Courses</span>
-                        <span class="text-lg font-bold text-slate-900">110+</span>
-                    </div>
-                </div>
-                <h3 class="text-2xl font-bold mb-3">Liberal Arts</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-8">Philosophy, Sociology, and Literature from global academic experts.</p>
-                <a href="register.html" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:gap-4 transition-all">
-                    Explore Subject <i class="fas fa-arrow-right text-sm"></i>
-                </a>
-            </div>
-        </div>
-        -->
-
-        <!-- Banner CTA -->
-        <div class="mt-24 rounded-[3rem] p-1 shadow-2xl shadow-indigo-200/50 bg-gradient-to-r from-indigo-600 to-purple-600">
-            <div class="bg-white rounded-[2.9rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10">
-                <div class="max-w-xl text-center md:text-left">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Start your learning journey for free</h2>
-                    <p class="text-slate-500 text-lg">Join 50,000+ students already advancing their careers with EduFlow. No credit card required to start.</p>
-                </div>
-                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-                    <a href="register.html" class="bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-indigo-700 transition text-center shadow-lg shadow-indigo-200">Create Free Account</a>
-                    <a href="login.html" class="bg-slate-50 text-slate-900 px-8 py-4 rounded-2xl font-bold hover:bg-slate-100 transition text-center border border-slate-200">Sign In</a>
-                </div>
-            </div>
-        </div>
-    </main>
-
-  
-    <!--Side bar of subjects
-    <div >
-
-
-    <h1>
-      { if subject %}
-        { subject.title }} courses a
-      { else %}
-        All courses
-      { endif %}
-    </h1>
-
-
-      <h4 class="dropdown-toggle p-2"{ if not subject %}class="selected"{ endif %}
-        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> Subjects </h4>
-
-      <a id="all_link" class="p-4" href="{ url 'course_list' %}">All</a>
-
-      <ul id="modules" class="dropdown-menu " aria-labelledby="dropdownMenuButton1">      
-        { for s in subjects %}
-          <li { if subject == s %}class="selected"{ endif %}>
-            <a href="{ url 'course_list_subject' s.slug %}">
-              { s.title }}<br><span>{ s.total_courses }} courses</span>
-            </a>
-          </li>
-        { endfor %}
-      </ul>
+			<!-- Grid for courses list -->
+			<div id="course-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+				{% for course in courses %}
+					<!-- Courses will be injected here -->
+					{% with subject=course.subject %}
+					<div class="course-card group bg-white rounded-3xl border border-slate-150 overflow-hidden hover:shadow-xl hover:shadow-indigo-900/5 hover:border-indigo-150 transition-all duration-300 flex flex-col justify-between">
+						<div>
+							<!-- Course picture -->
+							<div class="relative overflow-hidden h-48 bg-slate-100">
+								<img class="course-image w-full h-full object-cover transition-transform duration-500" alt=""
+									 src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80">
+								<div class="absolute top-3 left-3 flex gap-1.5">
+								  <a href="{% url 'course_detail' course.slug %}">
+									  <span class="bg-white/90 backdrop-blur px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-indigo-600 shadow-sm">{{ subject.title }}</span>
+								  </a>
+								</div>
+							</div>
+							<!-- Content Details -->
+							<div class="p-6">
+								<!-- a href="{% url 'course_list_subject' subject.slug %}" -->
+									<h3 class="font-bold text-slate-900 mb-1.5 line-clamp-2 h-12 leading-snug group-hover:text-indigo-600 transition-colors">
+										{{ course.title }}
+									</h3>
+								<!-- /a -->
+								{{ course.total_modules }} modules.
+								<p class="text-xs text-slate-400 font-semibold mb-3">Instructor: <span class="text-slate-600"> {{ course.owner }} </span></p>
+							</div>
+						</div>
+					</div>
+					{% endwith %}
+				{% empty %}
+					<!-- Empty State -->
+					<div id="empty-state" class=" flex-col items-center justify-center py-20 text-center flex">
+						<div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 mb-4">
+							<i class="fas fa-folder-open text-3xl"></i>
+						</div>
+						<h3 class="text-lg font-bold text-slate-900">No courses found for this subject</h3>
+						<p class="text-slate-500">We're still curating content for this specific subject.
+							<a href="{% url 'course_create' %}" class="button">Create a new course</a>
+						</p>
+					</div>
+				{% endfor %}
+			</div>
+        </main>
     </div>
-
-
-    <div class="mt-30 module">
-      <div id="courses_card">
-        { for course in courses %}
-          { with subject=course.subject %}
-            <div id="course_div" class="card shadow-sm">
-              <h3><a href="{ url 'course_detail' course.slug %}" > { course.title }} </a></h3>
-              <p><a href="{ url 'course_list_subject' subject.slug %}"> { subject}} </a>
-                { course.total_modules }} modules.
-                Instructor: { course.owner.get_full_name }}
-              </p>
-            </div>
-          { endwith %}
-        { empty %}
-            <p>No courses found yet for this subject. </p>
-         p><a href="{ url 'course_create' %}" class="button">Create new course</a></p
-        { endfor %}
-      </div>
-    </div>
--->
 
 {% endblock %}
 
