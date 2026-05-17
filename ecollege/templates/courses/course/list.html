@@ -100,18 +100,18 @@
 								<img class="course-image w-full h-full object-cover transition-transform duration-500" alt=""
 									 src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80">
 								<div class="absolute top-3 left-3 flex gap-1.5">
-								  <a href="{% url 'course_detail' course.slug %}">
+								  <a href="{% url 'course_list_subject' subject.slug %}">
 									  <span class="bg-white/90 backdrop-blur px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-indigo-600 shadow-sm">{{ subject.title }}</span>
 								  </a>
 								</div>
 							</div>
 							<!-- Content Details -->
 							<div class="p-6">
-								<!-- a href="{% url 'course_list_subject' subject.slug %}" -->
+								<a href="{% url 'course_detail' course.slug  %}">
 									<h3 class="font-bold text-slate-900 mb-1.5 line-clamp-2 h-12 leading-snug group-hover:text-indigo-600 transition-colors">
 										{{ course.title }}
 									</h3>
-								<!-- /a -->
+								</a>
 								{{ course.total_modules }} modules.
 								<p class="text-xs text-slate-400 font-semibold mb-3">Instructor: <span class="text-slate-600"> {{ course.owner }} </span></p>
 							</div>
