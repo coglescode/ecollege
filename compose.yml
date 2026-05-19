@@ -25,7 +25,7 @@ services:
   web:
     build: .
     container_name: ecollege_app
-    image: coglescode/ecollege:dev
+    image: coglescode/ecollege:latest
     restart: always
     networks:
        - django_network
