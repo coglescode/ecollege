@@ -4,15 +4,22 @@
 
 {% block content %}
 
-	<div class="h-screen pt-25 max-w-md w-full mx-auto">
+	<div class="h-screen pt-30 max-w-md w-full mx-auto">
 
     	<!-- Main Card -->
 		<div class="bg-white rounded-3xl card shadow-lg overflow-hidden">
 			<!-- Header -->
-			<div class="px-8 pt-8 pb-6 text-center">
-				<h1 class="heading-font text-3xl font-semibold text-zinc-900 mb-2">Welcome back</h1>
-				<p class="text-zinc-600 text-[15px]">Login to continue your learning journey</p>
-			</div>
+			{% if form.errors %}
+				<div class="px-8 pt-8 pb-6 text-center">
+					<h1 class="heading-font text-3xl font-semibold text-zinc-900 mb-2">Welcome back</h1>
+					<p class="text-center">Your username and password didn't match. Please try again.</p>
+				</div>
+			{% else %}
+				<div class="px-8 pt-8 pb-6 text-center">
+					<h1 class="heading-font text-3xl font-semibold text-zinc-900 mb-2">Welcome back</h1>
+					<p class="text-zinc-600 text-[15px]">Login to continue your learning journey</p>
+				</div>
+			{% endif %}
 
 			<!-- Form -->
 			<div class="px-8 pb-8">
@@ -72,11 +79,7 @@
 				</form>
 			</div>
 
-			{% if form.errors %}
-				<p class="text-center">Your username and password didn't match. Please try again.</p>
-			{% else %}
-				<p class="text-center">Please, use the following form to log in:</p>
-			{% endif %}
+
 
 			<!-- Sign up link -->
 			<div class="border-t border-zinc-100 py-6 text-center bg-zinc-50">
@@ -88,5 +91,9 @@
 
 		</div>
 	</div>
+
+	{% block footer %}
+	{% endblock %}
+
 
 {% endblock %}
