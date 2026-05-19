@@ -6,26 +6,26 @@ from dotenv import load_dotenv
 load_dotenv('.env')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG_PROD')
-SECRET_KEY = os.getenv('SECRET_KEY_PROD')
+DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = config('SECRET_KEY')
 
 #ADMINS = [
 #    ('Antonio M', 'email@mydomain.com'),
 #]
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_PROD', '').split(',')
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS_PROD', '').split(',')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default= '').split(',')
 
 DATABASE_SCHEMAS = ['test', 'public']
 
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': os.getenv('POSTGRES_DB'),
-       'USER': os.getenv('POSTGRES_USER'),
-       'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-       'HOST': os.getenv('POSTGRES_HOST'),
-       'PORT': os.getenv('POSTGRES_PORT'),
+       'NAME': config('POSTGRES_DB'),
+       'USER': config('POSTGRES_USER'),
+       'PASSWORD': config('POSTGRES_PASSWORD'),
+       'HOST': config('POSTGRES_HOST'),
+       'PORT': config('POSTGRES_PORT'),
        'OPTIONS': {
            'options': f"-c search_path={','.join(DATABASE_SCHEMAS)}"
        }
