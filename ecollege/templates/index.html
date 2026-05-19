@@ -48,7 +48,6 @@
                 <!-- Subject Cards -->
 				<div class="group p-6 rounded-3xl border border-gray-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all duration-300">
                     {% for s in subjects %}
-
 						<a  href="{% url 'course_list_subject' s.slug %}">
 						  	<h3 class="text-xl font-bold mb-2">{{ s.title }}</h3>
 							<p class="text-gray-500 text-sm">{{ s.total_courses }} courses.</p>
@@ -56,13 +55,7 @@
 					{% empty %}
 					  <h2> We are working to add courses right now. Be patient!</h2>
 					{% endfor %}
-
-					<!-- div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                        <i class="fas fa-laptop-code text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Web Development</h3>
-                    <p class="text-gray-500 text-sm">HTML, CSS, React, and Backend architecture.</p -->
-                </div>
+				</div>
 
                 <div class="group p-6 rounded-3xl border border-gray-100 hover:border-purple-100 hover:bg-purple-50/30 transition-all duration-300">
                     <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
