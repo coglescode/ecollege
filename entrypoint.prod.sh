@@ -25,4 +25,4 @@ python manage.py migrate --settings=capstone.settings.prod --noinput
 #      --protocol=http \
 #      --vacuum \
 
-uwsgi --http :8001 --module capstone.wsgi:application --env DJANGO_SETTINGS_MODULE=capstone.settings.prod
+uwsgi --http :8000 --module capstone.wsgi:application --env DJANGO_SETTINGS_MODULE=capstone.settings.prod
