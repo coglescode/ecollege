@@ -125,10 +125,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirection of students to the students course list when succefully logged in
-LOGIN_REDIRECT_URL = reverse_lazy('user_course_list')
+#LOGIN_REDIRECT_URL = reverse_lazy('user_course_list')
+
+# Redirection to all courses
+LOGIN_REDIRECT_URL = reverse_lazy('course_list')
+
 
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
-
-#django_heroku.settings(locals())
 
