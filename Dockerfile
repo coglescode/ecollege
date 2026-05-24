@@ -49,7 +49,8 @@ EXPOSE 8000
 # Make the entrypoint script executable
 RUN chmod +x /app/entrypoint.prod.sh
 
-ENV DJANGO_SETTINGS_MODULE=capstone.settings.local
+# Make sure to change this to your production settings
+ENV DJANGO_SETTINGS_MODULE=capstone.settings.prod
 
 # Set the entrypoint script
 ENTRYPOINT ["/app/entrypoint.prod.sh"]

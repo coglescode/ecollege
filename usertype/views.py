@@ -27,7 +27,7 @@ class StudentRegistrationView(CreateView):
     # Assing students to Students group for proper persmissions
     user.is_students = True
     user.save()
-    group = Group.objects.get(name="Students")
+    group = Group.objects.get(name="students")
     user.groups.add(group)
     login(self.request, user)
     return result
@@ -37,16 +37,18 @@ class StudentRegistrationView(CreateView):
 class TeacherRegisterView(CreateView):
   template_name = 'users/teacher/registration.html'
   form_class = UserRegisterForm
-  success_url = reverse_lazy('manage_course_list') 
+  success_url = reverse_lazy('manage_course_list')
 
   def form_valid(self, form):
     result = super().form_valid(form)
     cd = form.cleaned_data
-    user = authenticate(username=cd['username'], password=cd['password1'])
+    #user = authenticate(username=cd['username'], password=cd['password1'])
+    user= self.object
+
     # Assing intructors to Instructors group for proper persmissions
-    user.is_students = True
+    user.is_teachers = True
     user.save()
-    group = Group.objects.get(name="Instructors")
+    group, created = Group.objects.get_or_create(name="teachers")
     user.groups.add(group)
     login(self.request, user)
     return result

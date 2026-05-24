@@ -1,33 +1,75 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  {{ object.title }}
+  {{ course.title }}
 {% endblock %}
 
 {% block content %}
-  {% with subject=object.subject %}
-    <h1> 
-      {{ object.title }}  
-    </h1>
-  <div class="module">
-    <h2 id="overview"> Overview </h2>
-    <p>
-      <a href="{% url 'course_list_subject' subject.slug %}">{{ subject.title }}</a>
-      {{ object.modules.count }} modules.
-      Instructor: {{ object.owner.get_full_name }}
-    </p>   
-      <h2 id="object_overview">{{ object.overview|linebreaks }}</h2>
-      
-      {% if request.user.is_authenticated %}
-        
-          <form class="d-flex justify-content-center" id="enroll-form" action="{% url 'user_enroll_course' %}" method="post">
-            {{ enroll_form }}
-            {% csrf_token %}        
-              <input type="submit" value="Enroll now">         
-          </form>
-      {% else %}
-        <a href="{% url 'student_registration' %}" class="button">Register to enroll </a>
-      {% endif %}
-  </div>
-  {% endwith %}  
+
+	<!-- Main Content Layout -->
+    <main class="flex-1 max-w-4xl w-full mx-auto pt-30 px-6 py-12 flex items-center justify-center">
+        <div class="w-full bg-white rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-100/50 overflow-hidden p-8 sm:p-12 space-y-8">
+
+			{% with subject=course.subject %}
+				<!-- Header Metadata Section -->
+				<div class="space-y-4">
+					<!-- Subject Badge -->
+					<span id="course-badge" class="inline-block px-3.5 py-1 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors duration-300">
+						{{ course.subject }}
+					</span>
+
+					<!-- Course Title -->
+					<h1 id="course-title" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+						{{ course.title }}
+					</h1>
+
+					<!-- Instructor Info -->
+					<div class="flex items-center gap-2.5 pt-2 text-slate-500 font-medium text-sm sm:text-base">
+						<i class="far fa-user-circle text-indigo-500 text-lg"></i>
+						<span>Led by <strong id="instructor-name" class="text-slate-800 font-semibold"> {{ course.owner }}</strong></span>
+					</div>
+				</div>
+
+				<hr class="border-slate-100">
+
+				<!-- Course Summary & Overview Section -->
+				<div class="space-y-6">
+					<h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400">Course Overview</h2>
+					<p id="course-overview" class="text-slate-600 text-base sm:text-lg leading-relaxed font-light">
+						{{ object.overview|linebreaks }}
+					</p>
+				</div>
+
+				<!-- Module Amount Badge Summary -->
+				<div class="pt-4">
+					<div class="inline-flex items-center gap-3 bg-indigo-50/60 border border-indigo-100 px-5 py-3 rounded-2xl">
+						<div class="h-10 w-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-indigo-150">
+							<i class="fas fa-cubes text-sm"></i>
+						</div>
+						<div>
+							<span class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest leading-none mb-1">Curriculum Density</span>
+							<span id="module-count" class="text-sm font-bold text-indigo-950 leading-none">{{ course.modules.count }} Modules Included</span>
+
+						</div>
+					</div>
+				</div>
+
+				{% if request.user.is_authenticated %}
+				  <form class="d-flex justify-content-center" id="enroll-form" action="{% url 'user_enroll_course' %}" method="post">
+					{{ enroll_form }}
+					{% csrf_token %}
+					  <input class="w-full sm:w-auto bg-amber-600 backdrop-blur-md border border-white/20 text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-amber-700 transition"
+							 type="submit" value="Enroll now">
+				  </form>
+				{% else %}
+					<a href="{% url 'student_registration' %}" class="w-full sm:w-auto bg-amber-600 backdrop-blur-md border border-white/20 text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-amber-700 transition-all">
+						Register to enroll
+					</a>
+				{% endif %}
+			{% endwith %}
+
+        </div>
+    </main>
+
 {% endblock %}
+

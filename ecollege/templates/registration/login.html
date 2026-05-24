@@ -1,26 +1,99 @@
 {% extends "layout.html" %}
 
-
 {% block title %}Log in{% endblock %}
 
 {% block content %}
-  <h1 class="text-center">Log in</h1>
 
-    <div class="container-fluid d-flex flex-wrap  text-center justify-content-center">
-   
-        {% if form.errors %}
-          <p class="col-10 py-3">Your username and password didn't match. Please try again.</p>
-        {% else %}
-          <p class=" col-10 py-3">Please, use the following form to log in:</p>
-        {% endif %}
-        
-        <form id="login_form" class="col-5 col-lg-4 col-xl-3 " action="{% url 'login' %}" method="post">
-          {{ form.as_p }}
-          {% csrf_token %}
-          <input type="hidden" name="next" value="{{ next }}" />
-          <input class="form-control" type="submit" value="Log-in">
-        </form>
-    </div>
+	<div class="h-screen pt-30 max-w-md w-full mx-auto">
+
+    	<!-- Main Card -->
+		<div class="bg-white rounded-3xl card shadow-lg overflow-hidden">
+			<!-- Header -->
+			{% if form.errors %}
+				<div class="px-8 pt-8 pb-6 text-center">
+					<h1 class="heading-font text-3xl font-semibold text-zinc-900 mb-2">Welcome back</h1>
+					<p class="text-center">Your username and password didn't match. Please try again.</p>
+				</div>
+			{% else %}
+				<div class="px-8 pt-8 pb-6 text-center">
+					<h1 class="heading-font text-3xl font-semibold text-zinc-900 mb-2">Welcome back</h1>
+					<p class="text-zinc-600 text-[15px]">Login to continue your learning journey</p>
+				</div>
+			{% endif %}
+
+			<!-- Form -->
+			<div class="px-8 pb-8">
+
+				<input type="hidden" name="next" value="{{ next }}" />
+
+				<form id="login_form" class="space-y-6" action="{% url 'login' %}" method="post">
+					{% csrf_token %}
+					<div>
+						<label for="{{ form.username.id_for_label }}" class="block text-xs font-medium text-zinc-500 mb-1.5 tracking-widest">
+						  USERNAME:
+						</label>
+
+						<div class="relative">
+							<div class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
+								<i class="fa-solid fa-user"></i>
+							</div>
+							{{ form.username }}
+						</div>
+					</div>
+
+					<div>
+						<label for="{{ form.username.id_for_label }}" class="block text-xs font-medium text-zinc-500 mb-1.5 tracking-widest">
+						  PASSWORD:
+						</label>
+
+						<div class="relative">
+							<div class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
+								<i class="fa-solid fa-lock"></i>
+							</div>
+							<button type="button"
+									class="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600">
+								<i id="eyeIcon" class="fa-solid fa-eye"></i>
+							</button>
+							{{ form.password }}
+						</div>
+					</div>
+
+					<div class="flex items-center justify-between text-sm">
+						<label class="flex items-center gap-x-2 cursor-pointer">
+						  <input type="checkbox" class="w-4 h-4 accent-indigo-600 rounded border-zinc-300">
+						  <span class="text-zinc-600">Remember me</span>
+						</label>
+
+						<a href="#"
+						  class="text-indigo-600 hover:text-indigo-700 font-medium text-sm transition-colors">
+						  Forgot password?
+						</a>
+					</div>
+
+					<!-- Login Button -->
+					<button
+						type="submit"
+						class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-indigo-700 transition transform active:scale-[0.98] shadow-xl shadow-indigo-200">
+						Sign In
+					</button>
+				</form>
+			</div>
+
+
+
+			<!-- Sign up link -->
+			<div class="border-t border-zinc-100 py-6 text-center bg-zinc-50">
+				<p class="text-zinc-600 text-sm">
+				New to Ecollege?
+					<a href="{% url 'student_registration' %}" class="text-indigo-600 font-semibold hover:underline">Create free account</a>
+				</p>
+			</div>
+
+		</div>
+	</div>
+
+	{% block footer %}
+	{% endblock %}
 
 
 {% endblock %}

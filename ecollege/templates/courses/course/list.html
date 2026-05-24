@@ -1,64 +1,224 @@
 {% extends "layout.html" %}
-
 {% load static %}
 
  
-{% block title %}
-  {% if subject %}
-    {{ subject.title }} courses
-  {% else %}
-    All courses
-  {% endif %}
-{% endblock %}
-
 {% block content %}
-  
-    <h1>
-      {% if subject %} 
-        {{ subject.title }} courses 
-      {% else %}
-        All courses
-      {% endif %}        
-    </h1>
 
-  
-    <!--Side bar of subjects -->
-    <div class="navbar contents d-flex align-items-center justify-content-center ">
+	<!-- Header Section -->
+	<header class="bg-white border-b border-slate-100 pt-30 pb-5">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl">
+				<span class="inline-block px-3 py-1 mb-4 text-[10px] font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 rounded-lg">
+					Discover Your Next Skill
+				</span>
+				<h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Explore our world-class <br><span class="text-indigo-600">Learning Catalog</span></h1>
+				<p class="text-lg text-slate-500 mb-10 leading-relaxed">Whether you're looking to switch careers or master a specific hobby, we have the right subject for you taught by industry leaders.</p>
 
-      <h4 class="dropdown-toggle p-2"{% if not subject %}class="selected"{% endif %} 
-        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> Subjects </h4>
+			</div>
+		</div>
+	</header>
 
-      <a id="all_link" class="p-4" href="{% url 'course_list' %}">All</a>
+	<div class="max-w-[1600px] mx-auto flex flex-col md:flex-row min-h-[calc(100vh-64px)]">
 
-      <ul id="modules" class="dropdown-menu " aria-labelledby="dropdownMenuButton1">      
-        {% for s in subjects %}
-          <li {% if subject == s %}class="selected"{% endif %}>
-            <a href="{% url 'course_list_subject' s.slug %}">
-              {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
+        <!-- Left Sidebar Navigation -->
+        <aside class="w-full md:w-72 bg-white border-r border-slate-200 sticky md:top-16 md:h-[calc(100vh-64px)] overflow-y-auto custom-scrollbar z-40">
+            <div class="p-6">
+                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 px-4">Course Subjects</h2>
+
+                <nav class="space-y-1" id="subject-nav">
+
+					<a id="all_link" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all hover:bg-slate-50 group text-slate-500 text-slate-600 font-medium" href="{% url 'course_list' %}">
+						<i class="fas fa-layer-group w-5 text-center group-hover:text-indigo-600"></i>
+						All subjects
+						<button {% if not subject %} class="selected" {% endif %} id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+						</button>
+					</a>
+
+                    	<!-- List of subjects with a counter -->
+						<!-- ul id="modules" class="dropdown-menu " aria-labelledby="dropdownMenuButton1" -->
+						{% for s in subjects %}
+						  <!-- li { if subject == s %}class="selected"{ endif %} -->
+						  <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all hover:bg-slate-50 group text-slate-500">
+							<a
+							   href="{% url 'course_list_subject' s.slug %}">
+							  {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
+							</a>
+						  </button>
+						  <!-- /li -->
+						{% endfor %}
+					<!-- /ul -->
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Right Side Content -->
+        <main class="flex-1 bg-slate-50 p-6 md:p-10">
+			<!-- Header for Right Content -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div>
+					{% if subject %}
+						<nav class="flex text-xs text-slate-400 mb-2 gap-2">
+							<span class="hover:text-indigo-600 cursor-pointer">Courses</span>
+							<span>/</span>
+							<span id="breadcrumb-subject" class="text-slate-600 font-medium">{{ subject.title }}</span>
+						</nav>
+						<!-- h1 id="active-subject-title" class="text-3xl font-bold text-slate-900 tracking-tight">All Courses</h1 -->
+						<h1 id="active-subject-title" class="text-3xl font-bold text-slate-900 tracking-tight">{{ subject.title }} courses </h1>
+				  	{% else %}
+						<nav class="flex text-xs text-slate-400 mb-2 gap-2">
+							<span class="hover:text-indigo-600 cursor-pointer">Courses</span>
+							<span>/</span>
+							<span id="breadcrumb-subject" class="text-slate-600 font-medium">All courses</span>
+						</nav>
+
+						<h1 id="active-subject-title" class="text-3xl font-bold text-slate-900 tracking-tight">All Courses</h1>
+			 		{% endif %}
+                </div>
+
+				<!-- Tab for sorting courses inside header for right main content -->
+                <div class="flex items-center gap-3">
+                    <label class="text-xs font-bold text-slate-400 uppercase">Sort by:</label>
+					<label>
+						<select class="bg-white border border-slate-200 text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500">
+							<option>Most Popular</option>
+							<option>Newest</option>
+							<option>Highest Rated</option>
+						</select>
+					</label>
+				</div>
+            </div>
+
+			<!-- Grid for courses list -->
+			<div id="course-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+				{% for course in courses %}
+					<!-- Courses will be injected here -->
+					{% with subject=course.subject %}
+					<div class="course-card group bg-white rounded-3xl border border-slate-150 overflow-hidden hover:shadow-xl hover:shadow-indigo-900/5 hover:border-indigo-150 transition-all duration-300 flex flex-col justify-between">
+						<div>
+							<!-- Course picture -->
+							<div class="relative overflow-hidden h-48 bg-slate-100">
+								<img class="course-image w-full h-full object-cover transition-transform duration-500" alt=""
+									 src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80">
+								<div class="absolute top-3 left-3 flex gap-1.5">
+								  <a href="{% url 'course_list_subject' subject.slug %}">
+									  <span class="bg-white/90 backdrop-blur px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-indigo-600 shadow-sm">{{ subject.title }}</span>
+								  </a>
+								</div>
+							</div>
+							<!-- Content Details -->
+							<div class="p-6">
+								<a href="{% url 'course_detail' course.slug  %}">
+									<h3 class="font-bold text-slate-900 mb-1.5 line-clamp-2 h-12 leading-snug group-hover:text-indigo-600 transition-colors">
+										{{ course.title }}
+									</h3>
+								</a>
+								<p class="text-xs text-slate-400 font-semibold mb-3">Instructor: <span class="text-slate-600"> {{ course.owner }} </span></p>
+								<div class="p-6 pt-0 mt-auto">
+									<div class="flex items-center justify-between pt-4 border-t border-slate-100 gap-4">
+										<span class="text-sm text-slate-900">{{ course.total_modules }} modules.</span>
+										<a href="{% url 'course_detail' course.slug  %}" class="flex text-center bg-indigo-50 text-indigo-600 px-4 py-2.5 rounded-xl text-xs font-bold hover:bg-indigo-600 hover:text-white transition-all shadow-sm">
+											View Syllabus
+										</a>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+					{% endwith %}
+				{% empty %}
+					<!-- Empty State -->
+					<div id="empty-state" class=" flex-col items-center justify-center py-20 text-center flex">
+						<div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 mb-4">
+							<i class="fas fa-folder-open text-3xl"></i>
+						</div>
+						<h3 class="text-lg font-bold text-slate-900">No courses found for this subject</h3>
+						<p class="text-slate-500">We're still curating content for this specific subject.
+							<a href="{% url 'course_create' %}" class="button">Create a new course</a>
+						</p>
+					</div>
+				{% endfor %}
+			</div>
+        </main>
     </div>
 
-    <!--Main content where all courses displays-->
-    <div class="module">
-      <div id="courses_card">
-        {% for course in courses %}
-          {% with subject=course.subject %}
-            <div id="course_div" class="card shadow-sm">
-              <h3><a href="{% url 'course_detail' course.slug %}" > {{ course.title }} </a></h3>
-              <p><a href="{% url 'course_list_subject' subject.slug %}"> {{ subject}} </a>
-                {{ course.total_modules }} modules.
-                Instructor: {{ course.owner.get_full_name }}
-              </p>
+	<!-- Course Detail Slide-Over panel (Drawer) -->
+    <div id="course-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 overflow-hidden">
+            <!-- Background overlay -->
+            <div id="drawer-overlay" class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="closeDrawer()"></div>
+
+            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                <div id="drawer-content" class="pointer-events-auto w-screen max-w-2xl transform translate-x-full transition-transform duration-300 ease-in-out bg-white shadow-2xl flex flex-col h-full">
+                    <!-- Drawer Header -->
+                    <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+                        <span id="drawer-subject-badge" class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50">Subject</span>
+                        <button type="button" class="rounded-md text-slate-400 hover:text-slate-500 focus:outline-none" onclick="closeDrawer()">
+                            <span class="sr-only">Close panel</span>
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Drawer Scrollable Body -->
+                    <div class="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
+                        <div class="relative overflow-hidden h-64 rounded-2xl mb-6">
+                            <img id="drawer-image" src="" alt="Course Cover" class="w-full h-full object-cover">
+                        </div>
+
+                        <h2 id="drawer-title" class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight mb-2">Course Title</h2>
+                        <p id="drawer-instructor" class="text-sm text-indigo-600 font-semibold mb-6">Instructor Name</p>
+
+                        <!-- Highlights grid -->
+                        <div class="grid grid-cols-3 gap-4 p-4 bg-slate-50 rounded-xl mb-6 text-center">
+                            <div>
+                                <span class="block text-xs text-slate-400 font-semibold uppercase mb-1">Rating</span>
+                                <span id="drawer-rating" class="font-bold text-slate-800 text-sm">★ 4.9</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-slate-400 font-semibold uppercase mb-1">Students</span>
+                                <span id="drawer-students" class="font-bold text-slate-800 text-sm">12k</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs text-slate-400 font-semibold uppercase mb-1">Price</span>
+                                <span id="drawer-price" class="font-bold text-indigo-600 text-sm">$89.99</span>
+                            </div>
+                        </div>
+
+                        <!-- Course Description & Overview -->
+                        <div class="space-y-6 mb-8">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Short Description</h3>
+                                <p id="drawer-desc" class="text-slate-600 text-sm leading-relaxed">Teaser description.</p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Course Overview</h3>
+                                <p id="drawer-overview" class="text-slate-600 text-sm leading-relaxed">Detailed overview details.</p>
+                            </div>
+                        </div>
+
+                        <!-- Course Curriculum (Modules) -->
+                        <div>
+                            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Course Curriculum</h3>
+                            <div id="drawer-modules" class="space-y-3">
+                                <!-- Module items injected here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drawer Footer action -->
+                    <div class="border-t border-slate-100 p-6 bg-slate-50 flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-xs text-slate-400 font-semibold">Price total</span>
+                            <span id="drawer-footer-price" class="text-xl font-extrabold text-slate-900">$89.99</span>
+                        </div>
+                        <button class="bg-indigo-600 text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-150 transition-all">
+                            Enroll in Course
+                        </button>
+                    </div>
+                </div>
             </div>
-          {% endwith %}
-        {% empty %}
-            <p>No courses found yet for this subject. </p>
-            <!-- p><a href="{% url 'course_create' %}" class="button">Create new course</a></p -->
-        {% endfor %}
-      </div>
+        </div>
     </div>
 
 {% endblock %}
