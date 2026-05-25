@@ -28,7 +28,7 @@ services:
     image: coglescode/ecollege:latest
     restart: always
     networks:
-       - django_network
+       - dokploy-network
     #volumes:
     #   - ./app:/app
     ports:
@@ -47,6 +47,5 @@ services:
 
 
 networks:
-  django_network:
-    driver: bridge
+  dokploy-network:
     external: true
