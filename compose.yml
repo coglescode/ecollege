@@ -29,8 +29,8 @@ services:
     restart: always
     networks:
        - django_network
-    # volumes:
-    #   - .:/src
+    volumes:
+       - ./app:/app
     ports:
       - "8000:8000"
       #- "80:80"
