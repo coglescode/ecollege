@@ -20,12 +20,12 @@
 
 	<div class="max-w-[1600px] mx-auto flex flex-col md:flex-row min-h-[calc(100vh-64px)]">
 
-        <!-- Left Sidebar Navigation -->
-        <aside class="w-full md:w-72 bg-white border-r border-slate-200 sticky md:top-16 md:h-[calc(100vh-64px)] overflow-y-auto custom-scrollbar z-40">
-            <div class="p-6">
-                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 px-4">Course Subjects</h2>
+		<!-- Left Sidebar Navigation -->
+		<aside class="w-full md:w-72 bg-white border-r border-slate-200 sticky md:top-16 md:h-[calc(100vh-64px)] overflow-y-auto custom-scrollbar z-40">
+			<div class="p-6">
+				<h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 px-4">Course Subjects</h2>
 
-                <nav class="space-y-1" id="subject-nav">
+				<nav class="space-y-1" id="subject-nav">
 
 					<a id="all_link" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all hover:bg-slate-50 group text-slate-500 text-slate-600 font-medium" href="{% url 'course_list' %}">
 						<i class="fas fa-layer-group w-5 text-center group-hover:text-indigo-600"></i>
@@ -34,22 +34,20 @@
 						</button>
 					</a>
 
-                    	<!-- List of subjects with a counter -->
-						<!-- ul id="modules" class="dropdown-menu " aria-labelledby="dropdownMenuButton1" -->
-						{% for s in subjects %}
-						  <!-- li { if subject == s %}class="selected"{ endif %} -->
-						  <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all hover:bg-slate-50 group text-slate-500">
-							<a
-							   href="{% url 'course_list_subject' s.slug %}">
-							  {{ s.title }}<br><span>{{ s.total_courses }} courses</span>
-							</a>
-						  </button>
-						  <!-- /li -->
-						{% endfor %}
-					<!-- /ul -->
-                </nav>
-            </div>
-        </aside>
+					<!-- List of subjects with a counter -->
+					<!-- ul id="modules" class="dropdown-menu " aria-labelledby="dropdownMenuButton1" -->
+					{% for s in subjects %}
+						<!-- li { if subject == s %}class="selected"{ endif %} -->
+						<button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all hover:bg-slate-50 group text-slate-500">
+						<a
+							 href="{% url 'course_list_subject' s.slug %}">
+							{{ s.title }}<br><span>{{ s.total_courses }} courses</span>
+						</a>
+						</button>
+					{% endfor %}
+				</nav>
+			</div>
+		</aside>
 
         <!-- Right Side Content -->
         <main class="flex-1 bg-slate-50 p-6 md:p-10">
