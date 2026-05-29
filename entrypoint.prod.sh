@@ -4,7 +4,7 @@
 # DJANGO_SETTINGS_MODULE=capstone.settings.production
 #source /app/venv/bin/activate
 
-#python manage.py collectstatic --noinput
+python manage.py collectstatic --settings=capstone.settings.prod --noinput
 #python manage.py makemigrations --settings=capstone.settings.local --noinput
 #python manage.py migrate --settings=capstone.settings.local --noinput
 
