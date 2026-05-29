@@ -23,14 +23,14 @@ services:
   #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
   #     PGDATA: ${PGDATA}
   web:
-    build: .
+    #build: .
     container_name: ecollege_app
-    image: coglescode/ecollege:latest
+    image: coglescode/ecollege:dev
     restart: always
     networks:
-       - django_network
-    # volumes:
-    #   - .:/src
+       - dokploy-network
+    #volumes:
+    #  - static:/static
     ports:
       - "8000:8000"
       #- "80:80"
@@ -47,6 +47,9 @@ services:
 
 
 networks:
-  django_network:
+  dokploy-network:
     driver: bridge
     external: true
+
+#volumes:
+#  static:
