@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				} else {
 					// Top Transparent State
 					mainNav.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-md', 'shadow-slate-200/40', 'border-b', 'border-slate-100', 'py-3');
-					mainNav.classList.add('bg-transparent', 'border-b', 'border-white/10', 'py-4', 'sm:py-5');
+					mainNav.classList.add('border-b', 'border-white/10', 'py-4', 'sm:py-5');
 
 					document.getElementById('nav-brand-text').classList.replace('text-slate-900', 'text-white');
 					document.getElementById('nav-login-btn').classList.replace('text-slate-600', 'text-white/90');
