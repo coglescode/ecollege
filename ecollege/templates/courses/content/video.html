@@ -1,6 +1,5 @@
 {% load embed_video_tags %}
 
-<div class="videoWrapper ">
-    {% video item.url 'small' %}
-  
+<div class="videoWrapper aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-200 shadow-sm relative group">
+	{% video item.url 'small' %}
 </div>

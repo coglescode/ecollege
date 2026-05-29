@@ -2,94 +2,155 @@
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title> {% block title %} Ecollege | Master New Skills Online{% endblock %}</title>
 		<!-- Tailwind Play CDN. Trying Tailwind in the browser -->
-    	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 		<!-- Tailwind UI Elements -->
 		<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
-		<script src="https://unpkg.com/htmx.org@1.9.10"></script>
- 		<!-- link href="{% static 'ecollege/css/main.css' %}" rel="stylesheet" -->
+		<!-- HTMX CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js" integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V" crossorigin="anonymous"></script>
+
+		<!-- link href="{% static 'ecollege/css/main.css' %}" rel="stylesheet" -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+		<script src="{% static 'ecollege/js/main.js' %}"></script>
 
 		<!-- Bootstrap CDN links -->
 		<!-- link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
- 		<style>
+		<style>
 			@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 			body { font-family: 'Inter', sans-serif; }
 			.no-scrollbar::-webkit-scrollbar { display: none; }
 			.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 			.carousel-container { scroll-behavior: smooth; }
-    	</style>
+		</style>
 
-		<!-- link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" -->
-        <!-- link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" -->
-
+			<!-- link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" -->
+				<!-- link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" -->
 	</head>
 
 	<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
-		<nav class="fixed w-full z-50 transition-all duration-300 bg-black/20 backdrop-blur-sm border-b border-white/10">
+		<nav id="main-nav" class="fixed w-full z-50 transition-header bg-transparent border-white/10 py-4 sm:py-5 border-b">
 			<div class="max-w-7xl mx-auto px-6">
-				<div class="flex justify-between h-20 items-center">
-					<div class="flex items-center gap-2">
-						<div class="bg-indigo-600 p-2 rounded-lg">
-							<i class="fas fa-graduation-cap text-white text-lg"></i>
-						</div>
-						<a href="{% url 'index' %}">
-							<span class="text-2xl font-bold tracking-tight text-white">Ecollege</span>
-						</a>
-					</div>
-					<div class="md:hidden">
-						<button class="text-white text-2xl">
-							<i class="fas fa-bars"></i>
-						</button>
-					</div>
-					<div class="hidden md:flex space-x-8 items-center">
-						<a class="text-white/80 hover:text-white transition" id="{{ user.username }}"><strong>{{ user.username }}</strong></a>
+				<div class="flex justify-between items-center">
+
+					<!-- Brand Logo -->
+					<a href="{% url 'index' %}" class="flex items-center gap-2.5 z-50">
+							<div id="nav-logo-box" class="bg-indigo-600 p-2 rounded-xl transition-all duration-300">
+									<i class="fas fa-graduation-cap text-white text-lg"></i>
+							</div>
+							<span id="nav-brand-text" class="text-2xl font-black tracking-tight text-white transition-all duration-300">Ecollege</span>
+					</a>
+
+					<!-- Desktop Navigation Links -->
+					<div class="hidden md:flex space-x-8 items-center font-medium">
+						<a class="nav-link text-white/90 hover:text-white transition duration-200 py-2" id="{{ user.username }}"><strong>{{ user.username }}</strong></a>
 						{% if user.is_authenticated  %}
 							{% if 'teachers' in user.groups.all|join:"," %}
-								<a class="text-white/80 hover:text-white transition" href="{% url 'manage_course_list' %}">Manage courses</a>
+								<a class="nav-link text-white/90 hover:text-white transition duration-200 py-2" href="{% url 'manage_course_list' %}">Manage courses</a>
 							{% else %}
-								<a class="text-white/80 hover:text-white transition" href="{% url 'user_course_list' %}">Your courses</a>
+								<a class="nav-link text-white/90 hover:text-white transition duration-200 py-2" href="{% url 'user_course_list' %}">Your courses</a>
 							{% endif %}
 
 							<form id="logout-form" method="post" action="{% url 'logout' %}">
 								{% csrf_token %}
-								<button type="submit">Log out</button>
+								<button class="bg-indigo-600 text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:text-indigo-600 transition shadow-lg"
+												type="submit">Log out</button>
 							</form>
 						{% else %}
-							<a class="text-white/80 hover:text-indigo-400 transition" href="{% url 'course_list'  %}">All courses</a>
-							<a class="text-white/80 hover:text-indigo-400 transition" href="{% url 'login' %}">Log In</a>
-							<a class="text-white/80 hover:text-white transition" href="{% url 'student_registration' %}">
-								<button class="bg-indigo-600 text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:text-indigo-600 transition shadow-lg">
+							<a  class="nav-link text-white/90 hover:text-white transition duration-200 py-2" href="{% url 'course_list'  %}">All courses</a>
+							<a id="nav-login-btn" class="nav-link text-white/90 hover:text-white transition duration-200 py-2" href="{% url 'login' %}">Log In</a>
+							<a  class="bg-white text-indigo-600 px-6 py-3 rounded-xl font-bold hover:bg-slate-100 transition shadow-lg shadow-black/10 text-sm"
+								 href="{% url 'student_registration' %}">
 									Join Free
-								</button>
 							</a>
 						{% endif %}
-
-						<!--
-						<a href="#" class="text-white/80 hover:text-white transition">Courses</a>
-						<a href="#" class="text-white/80 hover:text-white transition">Mentors</a>
-						-->
-
 					</div>
-            	</div>
 
-				<!-- My old navbar
-            	<div class="container-fluid">
-                    <a href="javascript:void(0);" class="navbar-toggler border-0 h1" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                        <i id="mobileMenu" class="bi bi-list "></i>
-                    </a>
-                </div>-->
+
+					<!-- Mobile Menu Button (Hamburger) -->
+					<div class="md:hidden z-50">
+						<button id="mobile-menu-btn" class="text-white focus:outline-none p-2 flex items-center justify-center rounded-xl hover:bg-white/10 transition"  aria-label="Toggle menu">
+							<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path id="hamburger-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
+							</svg>
+						</button>
+					</div>
+				</div>
+			</div>
+    </nav>
+
+		<!-- Mobile Menu Drawer (Slide-out Sidebar) -->
+     <div id="mobile-drawer-backdrop" class="fixed inset-0 bg-slate-950/40 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-all duration-300" onclick="toggleMobileMenu()"></div>
+
+    <div id="mobile-drawer" class="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+        <!-- Top Drawer Header Area -->
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+            <div class="flex items-center gap-2.5">
+                <div class="bg-indigo-600 p-1.5 rounded-lg">
+                    <i class="fas fa-graduation-cap text-white text-sm"></i>
+                </div>
+                <span class="text-xl font-extrabold tracking-tight text-slate-900">Ecollege</span>
             </div>
-        </nav>
+            <button id="mobile-close-btn" class="h-8 w-8 text-slate-400 hover:text-slate-600 hover:bg-indigo-100 rounded-lg flex items-center justify-center transition">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+        </div>
 
-        {% block content %}                      
-        {% endblock %}
+        <!-- Scrollable Navigation Options Inside Mobile Drawer -->
+        <div class="flex-1 overflow-y-auto py-6 px-6 space-y-6">
+            <div class="flex flex-col space-y-4 text-sm font-semibold text-slate-700">
+                <a href="{% url 'course_list' %}" class="flex items-center gap-3.5 py-3 px-4 rounded-xl hover:bg-slate-50 transition">
+                    <i class="fas fa-book-open text-slate-400 text-base"></i>
+                    <span>All Courses</span>
+                </a>
+
+                <hr class="border-slate-100 my-2">
+
+                <!-- Mobile Accordion Item -->
+                <div class="space-y-1">
+                    <button class="w-full flex justify-between items-center py-3 px-4 rounded-xl hover:bg-slate-50 transition text-slate-700 font-semibold text-sm">
+                        <span class="flex items-center gap-3.5">
+                            <i class="fas fa-layer-group text-slate-400 text-base"></i>
+                            <span>Course Categories</span>
+                        </span>
+                        <i id="accordion-chevron" class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-200"></i>
+                    </button>
+                    <!-- Collapsible Contents -->
+                    <div id="mobile-accordion-content" class="hidden pl-11 pr-4 py-2 space-y-3 text-slate-600 text-xs font-semibold">
+
+											{% for s in subjects %}
+												<a class="block py-1 hover:text-indigo-600 transition" href="{% url 'course_list_subject' s.slug %}">
+													{{ s.title }}<br><span>{{ s.total_courses }} courses</span>
+												</a>
+											{% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drawer Footer Area -->
+        <div class="p-6 border-t border-slate-100 bg-slate-50 space-y-3.5">
+            <a href="{% url 'login' %}" class="block w-full py-3.5 border border-slate-200 hover:bg-white text-slate-700 rounded-xl text-center font-bold text-sm transition">
+                Sign In
+            </a>
+            <a href="{% url 'student_registration' %}" class="block w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-center font-bold text-sm transition shadow-lg shadow-indigo-100">
+                Join Free
+            </a>
+
+            <!-- div class="text-center">
+                <a href="{% url 'teacher_registration' %}" class="text-xs font-semibold text-slate-400 hover:text-indigo-600 transition">Teacher Login</a>
+            </div -->
+        </div>
+    </div>
+
+		{% block content %}
+		{% endblock %}
 
 		{% block footer %}
 		<!-- Footer -->
@@ -142,10 +203,7 @@
 			</div>
 		</footer>
 		{% endblock %}
-       
-        {% block script %}      
-            <script src="{% static 'ecollege/main.js' %}"></script>
-        {% endblock %}
-         
-	</body>
-</html>
+
+
+		</body>
+	</html>

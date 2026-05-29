@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% load static %}
+{% load tailwind_filters %}
 
 {% block title %}
   {% if object %}
@@ -10,24 +11,87 @@
 {% endblock %}
 
 {% block content %}
-  <h1>
-    {% if object %}
-      Edit course "{{ object.title }}"
-    {% else %}
-      Create a new course
-    {% endif %}
-  </h1>
+  <!-- Main Workspace Form Area -->
+  <main class="flex-1 w-full max-w-7xl mx-auto px-6 py-30">
 
-  <div class="module">
-    <h2>Course info</h2>
-    <form id="edit_course" method="post">
-      {{ form.as_p }}
-      {% csrf_token %}
-      <p><input type="submit" value="Save course"></p>
-    </form>
-  </div>
-{% endblock %}
-  
-{% block script %}
-  <script src="{% static 'ecollege/manage_edit.js' %}"></script>
+    <!-- Header -->
+    <div class="mb-8">
+      <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-[10px] font-bold tracking-wider uppercase border border-indigo-150 inline-block mb-3">
+        Metadata Schema
+      </span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+        Edit Course Information
+      </h1>
+      <p class="text-xs text-slate-400 mt-2">Update core routing details, subject directories, and descriptions to synchronize content maps.</p>
+    </div>
+
+    <!-- Layout Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- Left Column: Simple Editor Form -->
+      <div id="left_panel_edit_form" class=" lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xl shadow-slate-100/50">
+				<form  method="post">
+					{% csrf_token %}
+					{{ form | crispy }}
+
+					<!-- Action Buttons -->
+					<div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
+						<a href="#" class="flex-1 py-3.5 border border-slate-200 hover:bg-slate-50 rounded-xl text-xs font-bold text-slate-600 transition text-center order-2 sm:order-1">
+							Discard Changes
+						</a>
+						<button type="submit" class="flex-1 py-3.5 bg-indigo-600 hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-100 text-white rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-2 order-1 sm:order-2 active:scale-[0.98]">
+							<i class="far fa-save text-sm"></i>
+							<span>Save Course Info</span>
+						</button>
+					</div>
+				</form>
+			</div>
+
+			{% if object %}
+				<!-- Right Column: Live Context Preview Card -->
+				<div class="lg:col-span-5 lg:sticky lg:top-24 space-y-4">
+					<h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Live Schema Preview</h3>
+
+					<!-- Live rendered visual directory item -->
+					<div class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 flex flex-col justify-between transition-all duration-300">
+						<div class="p-6 sm:p-8 space-y-6">
+
+							<!-- Dynamic Badging -->
+							<div class="flex items-center justify-between">
+								<span id="preview-badge" class="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-amber-600 shadow-sm border bg-slate-50 border-slate-100">
+									{{ object.subject.title }}
+								</span>
+								<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-md">Drafting</span>
+							</div>
+
+							<!-- Title Header -->
+							<div>
+								<h2 id="preview-title" class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight leading-snug line-clamp-2">
+									{{ object.title }}
+								</h2>
+								<!-- Dynamic URL display -->
+								<p class="text-xs text-indigo-600 font-mono mt-2 truncate flex items-center gap-1">
+									<!--i class="fas fa-link text-[10px] text-slate-400"></i>
+									<a class="font-bold text-xs text-indigo-600" href="{% url 'course_list_subject' object.slug %}">{{ object.slug }}</a>
+									< span>eduflow.com/course/</span><span id="preview-slug" class="font-bold"></span> -->
+								</p>
+							</div>
+
+							<hr class="border-slate-100">
+
+							<!-- Dynamic Overview text -->
+							<div class="space-y-2">
+								<h4 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Syllabus Overview Preview</h4>
+								<p id="preview-overview-text" class="text-xs text-slate-500 line-clamp-6 leading-relaxed">
+									{{ object.overview }}
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			{% endif %}
+
+    </div>
+  </main>
 {% endblock %}

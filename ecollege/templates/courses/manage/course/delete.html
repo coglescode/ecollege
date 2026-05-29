@@ -3,15 +3,101 @@
 {% block title %} Delete courses {% endblock %}
 
 {% block content %}
-  <h1>Delete course "{{ object.title}}"</h1>
-  <div class="module py-5">
+
+	<!-- Primary Content Area -->
+    <main class="flex-1 w-full max-w-lg mx-auto px-6 flex items-center justify-center py-30">
+
+        <!-- Active Delete Confirmation Card State -->
+        <div id="deletion-card" class="w-full bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 text-center space-y-6 shadow-xl shadow-slate-100 transition-all duration-300">
+
+            <!-- Red Warning Shield Icon -->
+            <div class="h-14 w-14 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-md shadow-rose-100 border border-rose-100">
+                <i class="far fa-trash-alt"></i>
+            </div>
+
+            <!-- Header Titles -->
+            <div class="space-y-2">
+                <h1 class="font-extrabold text-slate-900 text-2xl tracking-tight">Delete This Course?</h1>
+                <p class="text-slate-400 text-xs">This operation is final and will permanently delete the following course from your catalog.</p>
+            </div>
+
+						<!-- Target Course Display -->
+					 	<div class="module p-5 bg-slate-50 border border-slate-200 rounded-2xl">
+							<span id="target-badge" class="px-2 py-0.5 bg-amber-50 text-amber-700 rounded-md text-[9px] font-extrabold uppercase border border-amber-200">Course Name</span>
+							<h2 id="target-title" class="font-bold text-slate-900 text-md sm:text-lg mt-2 leading-snug">{{ object.title }}</h2>
+							<p id="target-instructor" class="text-xs text-slate-400 font-medium mt-1">Instructor: {{ object.owner }}</p>
+
+						</div>
+
+
+						<form id="delete_course" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2" action="" method="post">
+							{% csrf_token %}
+
+							<input class="py-3.5 bg-rose-600 hover:bg-rose-700 hover:shadow-lg hover:shadow-rose-100 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 order-1 sm:order-2 cursor-pointer active:scale-[0.98]"
+											type="submit" value="Confirm">
+						</form>
+
+
+
+
+    </main>
+
+
+
+
+{% endblock %}
+
+  <div class="module py-30">
+		<h1>Delete course "{{ object.title}}"</h1>
+
     <form id="delete_course"  action="" method="post">
       {% csrf_token %}
       <p>Are you sure you want to delete "{{ object.title }}"?</p>
       <input type="submit" value="Confirm">
     </form>
   </div>
-  {% endblock %}
 
 
+ <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl">
+                <span id="target-badge" class="px-2 py-0.5 bg-amber-50 text-amber-700 rounded-md text-[9px] font-extrabold uppercase border border-amber-200">Course Name</span>
+                <h2 id="target-title" class="font-bold text-slate-900 text-md sm:text-lg mt-2 leading-snug">Philosophy of the Force & Telekinetic Principles</h2>
+                <p id="target-instructor" class="text-xs text-slate-400 font-medium mt-1">Instructor: Grand Master Yoda</p>
+            </div>
 
+            <!-- Simplified Action Buttons -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <a href="teacher-dashboard.html" class="py-3.5 border border-slate-200 hover:bg-slate-50 rounded-xl text-xs font-bold text-slate-600 transition order-2 sm:order-1 text-center">
+                    Keep Course
+                </a>
+                <button onclick="simulateSystemDeletion()" class="py-3.5 bg-rose-600 hover:bg-rose-700 hover:shadow-lg hover:shadow-rose-100 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 order-1 sm:order-2 cursor-pointer active:scale-[0.98]">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Confirm Delete</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Processing/Animation State Container -->
+        <div id="processing-state" class="hidden w-full max-w-md bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-6 shadow-xl shadow-slate-100">
+            <div class="relative w-16 h-16 mx-auto">
+                <div class="absolute inset-0 rounded-full border-4 border-rose-50"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-rose-500 border-t-transparent animate-spin"></div>
+            </div>
+            <div>
+                <h2 class="font-extrabold text-lg text-slate-900 leading-tight">Deauthorizing & Purging...</h2>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Deleting core course schemas and dropping student rosters from the cloud nodes.</p>
+            </div>
+        </div>
+
+        <!-- Success Screen State Container -->
+        <div id="success-state" class="hidden w-full max-w-md bg-white rounded-3xl border border-slate-200 p-10 text-center space-y-6 shadow-xl shadow-slate-100">
+            <div class="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-lg shadow-emerald-100 border border-emerald-100">
+                <i class="fas fa-check"></i>
+            </div>
+            <div>
+                <h2 class="font-extrabold text-lg text-slate-900 leading-tight">Deletion Completed</h2>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">The catalog entry and connected student enrollments have been removed from database map files.</p>
+            </div>
+            <a href="teacher-dashboard.html" class="block w-full bg-slate-900 hover:bg-slate-800 text-white py-3.5 rounded-xl text-xs font-bold transition">
+                Return to Workspace
+            </a>
+        </div>
