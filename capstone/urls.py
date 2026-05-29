@@ -28,7 +28,7 @@ from ecollege.forms import LoginForm
 
 
 
-urlpatterns = [        
+urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html", authentication_form=LoginForm), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(template_name="registration/logged_out.html"), name='logout'),   
     
@@ -39,4 +39,8 @@ urlpatterns = [
     path('usertype/', include('usertype.urls')),    
     path('', include('ecollege.urls')),
     
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
