@@ -13,50 +13,46 @@ document.addEventListener('DOMContentLoaded', function() {
 			const mobileAccordionContent = document.getElementById('mobile-accordion-content');
 			const accordionChevron = document.getElementById('accordion-chevron');
 			const hamburgerPath = document.getElementById('hamburger-path');
+			const navBrandText = document.getElementById('nav-brand-text');
 
 			// Nav Scroll Visual Transition Management
 			window.addEventListener('scroll', handleScroll);
 			function handleScroll() {
-				if (window.scrollY > 50) {
-					// Scrolled Down State (Frosted glass navigation panel)
-					mainNav.classList.remove('bg-transparent', 'border-b', 'border-white/10', 'py-4', 'sm:py-5');
-					mainNav.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-md', 'shadow-slate-200/40', 'border-b', 'border-slate-100', 'py-3');
-
-					// Text visual color corrections
-					document.getElementById('nav-brand-text').classList.replace('text-white', 'text-slate-900');
-					document.getElementById('nav-login-btn').classList.replace('text-white/90', 'text-slate-600');
-					document.getElementById('nav-login-btn').classList.replace('hover:text-white', 'hover:text-indigo-600');
-
-					// Button style overrides
-					//const ctaBtn = document.getElementById('nav-cta-btn');
-					//ctaBtn.className = "bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-100 text-sm";
-
-					// Regular links color sync
-					document.querySelectorAll('.nav-link').forEach(link => {
-						link.classList.replace('text-white/90', 'text-slate-600');
-						link.classList.replace('hover:text-white', 'hover:text-indigo-600');
-					});
-
-					// Adjust hamburger buttons
-					document.getElementById('mobile-menu-btn').classList.replace('text-white', 'text-slate-800');
+				const isScrolled = window.scrollY > 50;
+				// === NAV BACKGROUND ===
+				if (isScrolled) {
+						mainNav.classList.remove( 'border-b', 'border-white/10', 'py-4', 'sm:py-5');
+						mainNav.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-md', 'shadow-slate-200/40', 'border-b', 'border-slate-100', 'py-3');
 				} else {
-					// Top Transparent State
-					mainNav.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-md', 'shadow-slate-200/40', 'border-b', 'border-slate-100', 'py-3');
-					mainNav.classList.add('border-b', 'border-white/10', 'py-4', 'sm:py-5');
+						mainNav.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-md', 'shadow-slate-200/40', 'border-b', 'border-slate-100', 'py-3');
+						mainNav.classList.add( 'border-b', 'border-white/10', 'py-4', 'sm:py-5');
+				}
 
-					document.getElementById('nav-brand-text').classList.replace('text-slate-900', 'text-white');
-					document.getElementById('nav-login-btn').classList.replace('text-slate-600', 'text-white/90');
-					document.getElementById('nav-login-btn').classList.replace('hover:text-indigo-600', 'hover:text-white');
+				// === BRAND TEXT ===
+				const brandText = document.getElementById('nav-brand-text');
+				if (brandText) {
+						brandText.classList.toggle('text-slate-900', isScrolled);
+						brandText.classList.toggle('text-white', !isScrolled);
+				}
 
-					//const ctaBtn = document.getElementById('nav-cta-btn');
-					//ctaBtn.className = "bg-white text-indigo-600 px-6 py-3 rounded-xl font-bold hover:bg-slate-100 transition shadow-lg shadow-black/10 text-sm";
+				// === ALL NAV LINKS (including authenticated versions) ===
+				document.querySelectorAll('.nav-link').forEach(link => {
+						if (isScrolled) {
+								// Scrolled = Light mode
+								link.classList.remove('text-white/90', 'hover:text-white');
+								link.classList.add('text-slate-600', 'hover:text-indigo-600');
+						} else {
+								// Top = Transparent mode
+								link.classList.remove('text-slate-600', 'hover:text-indigo-600');
+								link.classList.add('text-white/90', 'hover:text-white');
+						}
+    		});
 
-					document.querySelectorAll('.nav-link').forEach(link => {
-						link.classList.replace('text-slate-600', 'text-white/90');
-						link.classList.replace('hover:text-indigo-600', 'hover:text-white');
-					});
-
-					document.getElementById('mobile-menu-btn').classList.replace('text-slate-800', 'text-white');
+				// === HAMBURGER ===
+				const mobileMenuBtnEl = document.getElementById('mobile-menu-btn');
+				if (mobileMenuBtnEl) {
+						mobileMenuBtnEl.classList.toggle('text-slate-800', isScrolled);
+						mobileMenuBtnEl.classList.toggle('text-white', !isScrolled);
 				}
 			}
 
