@@ -7,3 +7,4 @@ dockerfile
 Dockerfile
 docker-compose.yml
 compose.yml
+staticfiles/
