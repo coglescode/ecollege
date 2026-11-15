@@ -26,4 +26,4 @@ python manage.py migrate --settings=campus.settings.local --noinput
 #      --vacuum \
 
 
-gunicorn campus.wsgi --env DJANGO_SETTINGS_MODULE=campus.settings.local -b 0.0.0.0:8000
+gunicorn campus.wsgi --env DJANGO_SETTINGS_MODULE=campus.settings.local -b :8000
