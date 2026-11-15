@@ -1,4 +1,4 @@
-"""capstone URL Configuration
+"""ecollege URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -18,7 +18,7 @@ from django.contrib import auth
 from django.contrib.auth import views
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from capstone.settings.base import MEDIA_URL
+from campus.settings.base import MEDIA_URL
 from ecollege.views import CourseListView
 from django.conf import settings
 from django.conf.urls.static import static
