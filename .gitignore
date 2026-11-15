@@ -11,5 +11,6 @@ templatestags/__pycache__/
 templatestags/__init__.py
 db.sqlite3
 venv/
+.venv/
 .env
 .idea/
