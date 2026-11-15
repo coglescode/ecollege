@@ -50,10 +50,7 @@ COPY --from=builder  /app/.venv /app/.venv
 COPY --from=builder /app /app
 
 ENV	PATH="/app/.venv/bin:$PATH" \
-		PYTHONUNBUFFERED=1 \
-		DJANGO_SETTINGS_MODULE=campus.settings.local
-
-
+		PYTHONUNBUFFERED=1
 
 # Expose the application port
 EXPOSE 8000
