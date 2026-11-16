@@ -1,11 +1,16 @@
 from .base import *
+# from decouple import config
+# from dotenv import load_dotenv
+
+load_dotenv('.env')
+
 
 ALLOWED_HOSTS = ['*']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-SECRET_KEY='4-8p+vt=sr2$gc8gy9ylkp37x9t5k8=e&r^w_l+8qd@p6ib_t+' 
+SECRET_KEY = config('SECRET_KEY')
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
