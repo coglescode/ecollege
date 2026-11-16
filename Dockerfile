@@ -16,8 +16,7 @@ ENV UV_COMPILE_BYTECODE=1 \
 
 # Set working director
 WORKDIR /app
-#COPY uv.lock pyproject.toml ./
-#RUN uv sync --frozen --no-install-project
+
 
 # Install dependencies
 RUN --mount=type=cache,target=/root/.cache/uv \
@@ -43,21 +42,24 @@ WORKDIR /app
 # Setup a non-root user
 RUN groupadd --system --gid 999 app \
 	&& useradd --system --gid 999 --uid 999 --home-dir /app --no-create-home app \
-  && chown -R app:app /app
+  && chown -R app:app . /app
+
+
 
 # Copy the environment, but not the source code
-COPY --from=builder  /app/.venv /app/.venv
-COPY --from=builder /app /app
+#COPY --from=builder  /app/.venv /app/.venv
+COPY --from=builder --chown=app:app /app /app
 
 ENV	PATH="/app/.venv/bin:$PATH" \
 		PYTHONUNBUFFERED=1
+		#DJANGO_SETTINGS_MODULE=campus.settings.local
 
 # Expose the application port
 EXPOSE 8000
 
 # Make the entrypoint script executable
 RUN chmod +x entrypoint.prod.sh
-#
+
 USER app
 
 ## Set the entrypoint script
