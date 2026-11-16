@@ -6,7 +6,7 @@ campus/__pycache__/
 usertype/__pycache__/
 usertype/migrations/__pycache__/
 ecollege/__init__.py
-ecollege/migrations/
+#ecollege/migrations/
 templatestags/__pycache__/
 templatestags/__init__.py
 db.sqlite3
