@@ -5,8 +5,8 @@
 #source /app/venv/bin/activate
 
 #python manage.py collectstatic --settings=campus.settings.local --noinput
-python manage.py makemigrations --settings=campus.settings.local --noinput
-python manage.py migrate --settings=campus.settings.local --noinput
+#python manage.py makemigrations ecollege --settings=campus.settings.local --noinput
+python manage.py migrate ecollege --settings=campus.settings.local --noinput
 
 #python manage.py makemigrations --settings=campus.settings.prod --noinput
 #python manage.py migrate --settings=campus.settings.prod --noinput
