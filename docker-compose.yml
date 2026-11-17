@@ -25,12 +25,11 @@ services:
   web:
     build: .
     pull_policy: build
-    container_name: ecollege_app
+    container_name: ecollege
     image: coglescode/ecollege:dev
-    #image: local/ecollege:dev
     restart: always
-    networks:
-       - dokploy-network
+    #networks:
+    #   - dokploy-network
     #labels:
     #  - "traefik.enable=true"
     #  - "traefik.http.routers.<unique-name>.rule=Host(`ecollege0.coglescode.com`)"
@@ -63,7 +62,7 @@ services:
     #         "0.0.0.0:8001"]
 
 
-networks:
-  dokploy-network:
-    driver: bridge
-    external: true
+#networks:
+#  dokploy-network:
+#    driver: bridge
+#    external: true
