@@ -15,6 +15,11 @@ from pathlib import Path
 import whitenoise.middleware
 from django.urls import reverse_lazy
 
+from decouple import config
+from dotenv import load_dotenv
+
+load_dotenv('.env')
+
 import os
 import dj_database_url
 from decouple import config 
