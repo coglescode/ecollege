@@ -1,0 +1,48 @@
+<!-- Subject Cards (Tailwind CSS v4) -->
+<!-- Every subject sits in its own fixed-size wrapper (w-64 × h-60).
+     Below md the cards flow from the left; from md up every row is centered. -->
+<div class="flex flex-wrap gap-6 md:justify-center">
+{% for s in subjects %}
+	<div class="h-60 w-64 shrink-0">
+		<a href="{% url 'course_list_subject' s.slug %}"
+		   class="{% cycle '[--accent:var(--color-indigo-600)] [--accent-soft:var(--color-indigo-50)]' '[--accent:var(--color-purple-600)] [--accent-soft:var(--color-purple-50)]' '[--accent:var(--color-emerald-600)] [--accent-soft:var(--color-emerald-50)]' '[--accent:var(--color-orange-600)] [--accent-soft:var(--color-orange-50)]' '[--accent:var(--color-sky-600)] [--accent-soft:var(--color-sky-50)]' '[--accent:var(--color-rose-600)] [--accent-soft:var(--color-rose-50)]' %}
+		          group relative flex size-full flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white p-6 shadow-sm
+		          transition-all duration-300 hover:-translate-y-1 hover:border-(--accent)/30 hover:shadow-xl
+		          focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)">
+
+			<!-- Decorative glow (top-right corner, clipped by overflow-hidden) -->
+			<span aria-hidden="true"
+			      class="pointer-events-none absolute -top-12 -right-12 size-36 rounded-full bg-(--accent) opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-20"></span>
+
+			<!-- Icon tile -->
+			<span aria-hidden="true"
+			      class="relative mb-6 flex size-14 shrink-0 items-center justify-center rounded-2xl bg-(--accent-soft) text-2xl font-bold text-(--accent)
+			             transition-colors duration-300 group-hover:bg-(--accent) group-hover:text-white">
+				{{ s.title|first|upper }}
+			</span>
+
+			<!-- Title (clamped to 2 lines so it never breaks the fixed height) -->
+			<h3 class="relative line-clamp-2 text-lg font-bold text-gray-900">
+				{{ s.title }}
+			</h3>
+
+			<!-- Footer -->
+			<div class="relative mt-auto flex items-center justify-between pt-4">
+				<span class="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
+					<i class="fas fa-book-open text-(--accent)"></i>
+					{{ s.total_courses }} course{{ s.total_courses|pluralize }}
+				</span>
+				<i aria-hidden="true"
+				   class="fas fa-arrow-right text-gray-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-(--accent)"></i>
+			</div>
+		</a>
+	</div>
+{% empty %}
+	<div class="flex w-full flex-col items-center justify-center gap-3 rounded-3xl border-2 border-dashed border-gray-200 px-6 py-16 text-center">
+		<span class="flex size-14 items-center justify-center rounded-2xl bg-indigo-50 text-2xl text-indigo-600">
+			<i class="fas fa-hourglass-half"></i>
+		</span>
+		<h2 class="text-lg font-semibold text-gray-700">We are working to add courses right now. Be patient!</h2>
+	</div>
+{% endfor %}
+</div>

@@ -1,7 +1,9 @@
-# venv/
+.venv/
 db.sqlite3
 .env
 *.pyc
 */__pycache__/
 dockerfile
 Dockerfile
+docker-compose.yml
+staticfiles/

@@ -1,56 +1,66 @@
 # Dockerfile for ecollege
-FROM python:3.13.3-slim-bookworm AS build
+FROM python:3.15-slim-trixie AS builder
+# It is best practice to pin to a specific uv version like below:
+COPY --from=ghcr.io/astral-sh/uv:0.13.8 /uv /uvx /bin/
+
 
 # Environment variables to optimize Python performance
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# Pin the Python version uv should use
+#		UV_PYTHON=<PYTHON_VERSION>
+ENV UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy \
+    UV_NO_DEV=1 \
+    UV_TOOL_BIN_DIR=/usr/local/bin
 
-# Create the app directory
-#RUN mkdir /app
+# UV_PYTHON=3.15
 
-# Install dependencies
-RUN apt-get update && apt-get install -y gcc 
-
-# Set working directory
+# Set working director
 WORKDIR /app
 
-COPY requirements.txt .
 
-RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+		uv sync --frozen --no-install-project
+
+# Copy the project into the image
+COPY . /app
+
+#Sync the project
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked
 
 
 # Stage 2: Production stage
-FROM python:3.13.3-slim-bookworm
+FROM python:3.15-slim-trixie AS runtime
 
-RUN useradd -m -r appuser && \
-    mkdir -p /app && \
-    chown appuser:appuser /app
-
-COPY --from=build /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
-COPY --from=build /usr/local/bin /usr/local/bin
-
-# Set working directory
 WORKDIR /app
 
-# Copy the application code
-COPY  --chown=appuser:appuser . .
+#RUN groupadd --system --gid 999 app && useradd --system --gid 999 --uid 999 --home-dir /app app
 
-# Environment variables to optimize Python performance
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
+# Setup a non-root user
+RUN groupadd --system --gid 999 app \
+	&& useradd --system --gid 999 --uid 999 --home-dir /app --no-create-home app \
+  && chown -R app:app . /app
 
-# Switch to non-root user
-USER appuser
+
+
+# Copy the environment, but not the source code
+#COPY --from=builder  /app/.venv /app/.venv
+COPY --from=builder --chown=app:app /app /app
+
+ENV	PATH="/app/.venv/bin:$PATH" \
+		PYTHONUNBUFFERED=1
+		#DJANGO_SETTINGS_MODULE=campus.settings.local
 
 # Expose the application port
 EXPOSE 8000
 
 # Make the entrypoint script executable
-RUN chmod +x /app/entrypoint.prod.sh
+RUN chmod +x entrypoint.prod.sh
 
-# Make sure to change this to your production settings
-ENV DJANGO_SETTINGS_MODULE=capstone.settings.prod
+USER app
 
-# Set the entrypoint script
+## Set the entrypoint script
 ENTRYPOINT ["/app/entrypoint.prod.sh"]
