@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'campus.health.HealthCheckMiddleware',
     #'django.contrib.staticfiles.finders.FileSystemFinder',
     #'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
