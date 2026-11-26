@@ -10,20 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
-
-import whitenoise.middleware
-from django.urls import reverse_lazy
-
-from decouple import config
-from dotenv import load_dotenv
-
-load_dotenv('.env')
-
 import os
 import dj_database_url
-from decouple import config 
+from pathlib import Path
+import whitenoise.middleware
+from django.urls import reverse_lazy
 from dotenv import  load_dotenv
+load_dotenv('.env')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -59,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'campus.health.HealthCheckMiddleware',
     #'django.contrib.staticfiles.finders.FileSystemFinder',
     #'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
