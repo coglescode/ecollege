@@ -37,13 +37,12 @@ FROM python:3.15-slim-trixie AS runtime
 
 WORKDIR /app
 
-#RUN groupadd --system --gid 999 app && useradd --system --gid 999 --uid 999 --home-dir /app app
+RUN apt-get -y update && apt-get install -y --no-install-recommends curl
 
 # Setup a non-root user
 RUN groupadd --system --gid 999 app \
 	&& useradd --system --gid 999 --uid 999 --home-dir /app --no-create-home app \
   && chown -R app:app . /app
-
 
 
 # Copy the environment, but not the source code
@@ -52,7 +51,7 @@ COPY --from=builder --chown=app:app /app /app
 
 ENV	PATH="/app/.venv/bin:$PATH" \
 		PYTHONUNBUFFERED=1
-		#DJANGO_SETTINGS_MODULE=campus.settings.local
+
 
 # Expose the application port
 EXPOSE 8000
